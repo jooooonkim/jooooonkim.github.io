@@ -6,93 +6,235 @@
     <title>Joon Kim - Mechanical Engineering Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Custom styles for Inter font and smooth scrolling */
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #f8fafc; /* Light blue-gray background */
-            color: #334155; /* Dark slate text */
+        /* Define custom CSS variables for the new color palette */
+        :root {
+            --color-dark-brown-taupe: #563727;
+            --color-dark-grey-brown: #372C2E;
+            --color-white: #FFFFFF;
+            --color-goldenrod-orange-gold: #DE9E48;
+            --color-medium-brown: #7A431D;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
         }
+
+        /* Global styles using custom properties and Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-white); /* Clean white background */
+            color: var(--color-dark-brown-taupe); /* Primary text color */
+        }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #e2e8f0;
+            background: #f0f0f0; /* Lighter track */
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #64748b;
+            background: var(--color-goldenrod-orange-gold);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
+            background: var(--color-medium-brown);
         }
-        /* Hero section background pattern */
-        .hero-pattern {
-            background-image: linear-gradient(to right, #e0f2fe, #bfdbfe);
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: var(--color-dark-grey-brown); /* Dark nav */
+            color: var(--color-white);
+        }
+        nav a {
+            color: var(--color-white); /* Nav links */
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+        }
+        nav a:hover {
+            color: var(--color-goldenrod-orange-gold); /* Nav links hover */
+            transform: scale(1.05); /* Increased size on hover */
+            box-shadow: var(--shadow-light); /* Subtle shadow on hover */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+
+        /* Hero Section background and colors */
+        .hero-section {
+            background-color: var(--color-dark-grey-brown); /* Dark background for hero */
+            color: var(--color-white); /* Text on hero */
             position: relative;
             overflow: hidden;
         }
-        .hero-pattern::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.2) 0%, transparent 50%),
-                        radial-gradient(circle at bottom right, rgba(255,255,255,0.2) 0%, transparent 50%);
-            opacity: 0.6;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at bottom right, rgba(255,255,255,0.05) 0%, transparent 50%);
+            opacity: 0.8;
         }
+        .hero-section h1 {
+            color: var(--color-goldenrod-orange-gold); /* Hero title accent */
+        }
+        .hero-section .btn-primary {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown); /* Text on gold button */
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600; /* Slightly bolder for buttons */
+        }
+        .hero-section .btn-primary:hover {
+            background-color: var(--color-medium-brown); /* Darker gold/brown on hover */
+            color: var(--color-white);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--color-dark-brown-taupe); /* Heading color */
+            font-weight: 700; /* Bolder headings */
+        }
+
         /* Project card hover effect */
         .project-card {
+            background-color: var(--color-white); /* White card background */
+            color: var(--color-dark-brown-taupe);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 1px solid #eee; /* Subtle border for clean look */
         }
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* More pronounced shadow */
+        }
+        .project-card h3 {
+            color: var(--color-medium-brown); /* Project title */
+            font-weight: 600;
+        }
+        .project-card a {
+            color: var(--color-goldenrod-orange-gold); /* Project link */
+            transition: color 0.3s ease-in-out; /* Removed transform and box-shadow transitions */
+            font-weight: 500;
+            display: inline-block; /* Required for transform on inline elements */
+            padding: 4px 8px; /* Add padding for better hover area */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+        .project-card a:hover {
+            color: var(--color-medium-brown); /* Project link hover */
+            /* Removed transform and box-shadow for this specific element */
+        }
+
+        /* Resume Button */
+        .btn-download {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-download:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Contact Buttons */
+        .btn-contact-email {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-contact-email:hover {
+            background-color: var(--color-medium-brown);
+            color: var(--color-white);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .btn-contact-linkedin {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-contact-linkedin:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .btn-contact-github {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-contact-github:hover {
+            background-color: var(--color-jet-black); /* Jet black for GitHub hover */
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+        }
+        footer a {
+            color: var(--color-goldenrod-orange-gold);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+            display: inline-block; /* Required for transform on inline elements */
+            padding: 4px; /* Add padding for better hover area */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+        footer a:hover {
+            color: var(--color-white);
+            transform: scale(1.1); /* Slightly larger scale for footer icons */
+            box-shadow: var(--shadow-light); /* Subtle shadow on hover */
         }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition duration-300">Joon Kim</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="text-gray-700 hover:text-blue-600 transition duration-300">About</a>
-                <a href="#projects" class="text-gray-700 hover:text-blue-600 transition duration-300">Projects</a>
-                <a href="#resume" class="text-gray-700 hover:text-blue-600 transition duration-300">Resume</a>
-                <a href="#contact" class="text-gray-700 hover:text-blue-600 transition duration-300">Contact</a>
+            <a href="#home" class="text-3xl font-bold">Joon Kim</a>
+            <div class="hidden md:flex space-x-8 text-xl">
+                <a href="#about">About</a>
+                <a href="#projects">Featured Projects</a>
+                <a href="all-projects.html">All Projects</a>
+                <a href="#resume">Resume</a>
+                <a href="#contact">Contact</a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 shadow-inner">
-            <a href="#about" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 transition duration-300">About</a>
-            <a href="#projects" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 transition duration-300">Projects</a>
-            <a href="#resume" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 transition duration-300">Resume</a>
-            <a href="#contact" class="block px-6 py-2 text-gray-700 hover:bg-gray-100 transition duration-300">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
+            <a href="#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+            <a href="#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-pattern py-20 md:py-32 text-center text-gray-800">
+    <section id="home" class="hero-section py-20 md:py-32 text-center">
         <div class="container mx-auto px-6">
-            <img src="https://placehold.co/150x150/cbd5e1/334155?text=Your+Photo" alt="Joon Kim"
+            <img src="https://placehold.co/150x150/DE9E48/372C2E?text=Your+Photo" alt="Joon Kim"
                  class="w-36 h-36 rounded-full mx-auto mb-6 shadow-lg border-4 border-white object-cover">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-blue-800">Joon Kim</h1>
-            <p class="text-xl md:text-2xl mb-8 font-medium">Mechanical Engineering Student | Innovator | Problem Solver</p>
-            <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
-                View My Projects <i class="fas fa-arrow-right ml-2"></i>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4">Joon Kim</h1>
+            <p class="text-2xl md:text-3xl mb-8 font-medium">Mechanical Engineering Student | Autonomous Controls & Product Design</p>
+            <a href="#projects" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+                View Featured Projects <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
     </section>
@@ -100,50 +242,48 @@
     <!-- About Section -->
     <section id="about" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-blue-700">About Me</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-10">About Me</h2>
             <div class="flex flex-col md:flex-row items-center md:space-x-12">
                 <div class="md:w-1/3 mb-8 md:mb-0">
-                    <img src="https://placehold.co/300x300/e2e8f0/334155?text=About+Image" alt="About Me"
+                    <img src="https://placehold.co/300x300/563727/FFFFFF?text=About+Image" alt="About Me"
                          class="rounded-lg shadow-xl w-full h-auto object-cover">
                 </div>
-                <div class="md:w-2/3 text-lg leading-relaxed text-gray-700">
-                    <p class="mb-4">Hello! I'm Joon Kim, a passionate mechanical engineering student with a keen interest in design, robotics, and sustainable energy solutions. My academic journey has equipped me with a strong foundation in mechanics, thermodynamics, materials science, and computational tools like CAD and FEA.</p>
-                    <p class="mb-4">I thrive on hands-on projects and enjoy bringing theoretical concepts to life. Whether it's designing a new mechanism, optimizing an existing system, or tackling complex engineering challenges, I'm always eager to learn and contribute.</p>
-                    <p>Outside of my studies, I enjoy [mention a hobby or two, e.g., building drones, hiking, playing chess]. I'm always looking for opportunities to apply my skills and collaborate on impactful projects.</p>
+                <div class="md:w-2/3 text-xl leading-relaxed">
+                    <p class="mb-4">I am a mechanical engineering student at The Cooper Union specializing in mechanical design, autonomous systems, and controls. My project experience, which includes developing drone swarm control technology and competing with autonomous vehicles, has sharpened my skills in CAD design, programming, and collaborative problem-solving. My international background and multilingual abilities provide me with a unique perspective on teamwork and innovation. My goal is to apply this blend of technical skill and global insight to engineer creative solutions for real-world challenges.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-16 md:py-24 bg-gray-50">
+    <!-- Featured Projects Section (Only 3 projects) -->
+    <section id="projects" class="py-16 md:py-24" style="background-color: #f8f8f8;"> <!-- Slightly off-white for subtle contrast -->
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-700">My Projects</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-                <!-- Project Card 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden project-card">
-                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Robotics+Arm" alt="Robotics Arm Project" class="w-full h-56 object-cover">
+                <!-- Project Card 1 (Featured) -->
+                <div class="rounded-lg shadow-lg overflow-hidden project-card">
+                    <img src="https://placehold.co/600x400/7A431D/FFFFFF?text=Robotics+Arm" alt="Robotics Arm Project" class="w-full h-56 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-3 text-blue-600">Automated Robotic Arm</h3>
-                        <p class="text-gray-700 mb-4 text-base">Designed and simulated a 6-axis robotic arm for pick-and-place operations using SolidWorks and MATLAB. Focused on kinematics, dynamics, and control system implementation.</p>
+                        <h3 class="text-2xl font-semibold mb-3">Interactive Drone Simulations of Dynamic Systems</h3>
+                        <p class="mb-4 text-lg">Interactive simulations of differential equation systems using drones as physical models with real-time user interaction through hand gestures.</p>
                         <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition duration-300">
+                            <a href="project-automated-robotic-arm.html" class="font-medium text-lg">
                                 View Details <i class="fas fa-external-link-alt ml-1"></i>
                             </a>
-                            <span class="text-sm text-gray-500">Fall 2023</span>
+                            <span class="text-sm text-gray-500">Summer 2024</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project Card 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden project-card">
-                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Heat+Exchanger" alt="Heat Exchanger Project" class="w-full h-56 object-cover">
+                <!-- Project Card 2 (Featured) -->
+                <div class="rounded-lg shadow-lg overflow-hidden project-card">
+                    <img src="https://placehold.co/600x400/563727/FFFFFF?text=Heat+Exchanger" alt="Heat Exchanger Project" class="w-full h-56 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-3 text-blue-600">Compact Heat Exchanger Design</h3>
-                        <p class="text-gray-700 mb-4 text-base">Developed a compact shell-and-tube heat exchanger model for improved thermal efficiency, utilizing ANSYS Fluent for CFD analysis and optimization.</p>
+                        <h3 class="text-2xl font-semibold mb-3">Gear Train Race</h3>
+                        <p class="mb-4 text-lg">A high-efficiency gear train for a competition to rapidly lift a 10-pound weight with a limited torque and its many different design iterations.</p>
                         <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition duration-300">
+                            <a href="project-compact-heat-exchanger.html" class="font-medium text-lg">
                                 View Details <i class="fas fa-external-link-alt ml-1"></i>
                             </a>
                             <span class="text-sm text-gray-500">Spring 2024</span>
@@ -151,30 +291,14 @@
                     </div>
                 </div>
 
-                <!-- Project Card 3 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden project-card">
-                    <img src="https://placehold.co/600x400/34d399/ffffff?text=Sustainable+Vehicle" alt="Sustainable Vehicle Project" class="w-full h-56 object-cover">
+                <!-- Project Card 3 (Featured) -->
+                <div class="rounded-lg shadow-lg overflow-hidden project-card">
+                    <img src="https://placehold.co/600x400/DE9E48/372C2E?text=Sustainable+Vehicle" alt="Sustainable Vehicle Project" class="w-full h-56 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-3 text-blue-600">Sustainable Urban Mobility Vehicle</h3>
-                        <p class="text-gray-700 mb-4 text-base">Collaborated on the design of a lightweight, electric vehicle chassis, focusing on material selection, structural integrity, and manufacturing feasibility.</p>
+                        <h3 class="text-2xl font-semibold mb-3">EZ-Fold Chair</h3>
+                        <p class="mb-4 text-lg">A space-efficient, ergonomic chair designed to assist elderly individuals in putting on shoes, addressing limited space and stability needs in Korean apartments.</p>
                         <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition duration-300">
-                                View Details <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
-                            <span class="text-sm text-gray-500">Summer 2023</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Add more project cards as needed -->
-                <!-- Project Card 4 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden project-card">
-                    <img src="https://placehold.co/600x400/fcd34d/334155?text=FEA+Analysis" alt="FEA Analysis Project" class="w-full h-56 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-3 text-blue-600">FEA of a Custom Bracket</h3>
-                        <p class="text-gray-700 mb-4 text-base">Performed Finite Element Analysis on a custom-designed structural bracket to optimize its geometry for reduced stress concentration and weight.</p>
-                        <div class="flex justify-between items-center">
-                            <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition duration-300">
+                            <a href="project-sustainable-vehicle.html" class="font-medium text-lg">
                                 View Details <i class="fas fa-external-link-alt ml-1"></i>
                             </a>
                             <span class="text-sm text-gray-500">Fall 2022</span>
@@ -183,17 +307,22 @@
                 </div>
 
             </div>
+            <div class="text-center mt-12">
+                <a href="all-projects.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+                    View All Projects <i class="fas fa-folder-open ml-2"></i>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Resume Section -->
     <section id="resume" class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6 max-w-4xl text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-blue-700">My Resume</h2>
-            <p class="text-lg text-gray-700 mb-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-10">My Resume</h2>
+            <p class="text-xl mb-8">
                 Download my full resume to learn more about my academic background, work experience, skills, and achievements.
             </p>
-            <a href="your-resume.pdf" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 inline-flex items-center">
+            <a href="your-resume.pdf" target="_blank" class="btn-download py-3 px-8 rounded-full shadow-lg inline-flex items-center">
                 <i class="fas fa-download mr-2"></i> Download Resume (PDF)
             </a>
             <p class="text-sm text-gray-500 mt-4">
@@ -203,23 +332,23 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 md:py-24 bg-gray-50">
+    <section id="contact" class="py-16 md:py-24" style="background-color: #f8f8f8;">
         <div class="container mx-auto px-6 max-w-xl text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-blue-700">Get In Touch</h2>
-            <p class="text-lg text-gray-700 mb-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-10">Get In Touch</h2>
+            <p class="text-xl mb-8">
                 I'm always open to discussing new projects, collaborations, or opportunities. Feel free to reach out!
             </p>
             <div class="flex flex-col space-y-6">
                 <!-- Email -->
-                <a href="mailto:your.email@example.com" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300 inline-flex items-center justify-center">
+                <a href="mailto:your.email@example.com" class="btn-contact-email py-4 px-8 rounded-lg shadow-md inline-flex items-center justify-center">
                     <i class="fas fa-envelope mr-3 text-xl"></i> Email Me
                 </a>
                 <!-- LinkedIn -->
-                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-4 px-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300 inline-flex items-center justify-center">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="btn-contact-linkedin py-4 px-8 rounded-lg shadow-md inline-flex items-center justify-center">
                     <i class="fab fa-linkedin mr-3 text-xl"></i> Connect on LinkedIn
                 </a>
                 <!-- GitHub (if you have a relevant profile) -->
-                <a href="https://github.com/yourgithub" target="_blank" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-4 px-8 rounded-lg shadow-md transform hover:scale-105 transition duration-300 inline-flex items-center justify-center">
+                <a href="https://github.com/yourgithub" target="_blank" class="btn-contact-github py-4 px-8 rounded-lg shadow-md inline-flex items-center justify-center">
                     <i class="fab fa-github mr-3 text-xl"></i> My GitHub
                 </a>
             </div>
@@ -230,17 +359,17 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 text-center">
+    <footer class="py-8 text-center">
         <div class="container mx-auto px-6">
-            <p>&copy; 2025 Joon Kim. All rights reserved.</p>
+            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
             <div class="flex justify-center space-x-6 mt-4">
-                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">
                     <i class="fab fa-linkedin text-2xl"></i>
                 </a>
-                <a href="https://github.com/yourgithub" target="_blank" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="https://github.com/yourgithub" target="_blank">
                     <i class="fab fa-github text-2xl"></i>
                 </a>
-                <a href="mailto:your.email@example.com" class="text-gray-400 hover:text-white transition duration-300">
+                <a href="mailto:your.email@example.com">
                     <i class="fas fa-envelope text-2xl"></i>
                 </a>
             </div>
@@ -260,18 +389,24 @@
         const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                // Check if the link is an internal anchor or an external page link
+                if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+                    mobileMenu.classList.add('hidden');
+                }
             });
         });
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling for navigation links (only for internal anchors)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>

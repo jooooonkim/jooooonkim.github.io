@@ -111,7 +111,8 @@
         /* Fading Background Section */
         .fading-background {
             height: 200px; /* Adjusted height for the background image */
-            background-image: url('https://placehold.co/1200x600/7A431D/FFFFFF?text=Project+Background'); /* Placeholder image, replace with your actual project image */
+            /* IMPORTANT: Replace 'path/to/your/project-hero-image.jpg' with your actual image path */
+            background-image: url('../images/robot-arm-hero.jpg'); /* Example: Image in root 'images' folder */
             background-size: cover;
             background-position: center;
             position: relative;
@@ -121,6 +122,34 @@
             -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
         }
+
+        /* Responsive Embed Container (for videos, PDFs, presentations) */
+        .embed-responsive-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width = 9 / 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000; /* Fallback background for embeds */
+            border-radius: 0.5rem; /* Rounded corners for the container */
+            box-shadow: var(--shadow-medium); /* Subtle shadow for the embed */
+            margin-bottom: 2rem; /* Space below the embed */
+        }
+        .embed-responsive-container iframe,
+        .embed-responsive-container object,
+        .embed-responsive-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* Adjust aspect ratio for PDFs if they are typically taller (e.g., 8.5x11) */
+        .embed-responsive-pdf {
+            padding-bottom: 129%; /* Approx. 8.5x11 ratio (11/8.5 = 1.294) */
+        }
+
 
         /* Footer */
         footer {
@@ -149,7 +178,7 @@
             <a href="../index.html" class="text-3xl font-bold">Joon Kim</a>
             <div class="hidden md:flex space-x-8 text-xl">
                 <a href="../index.html#about">About</a>
-                <a href="../index.1html#projects">Featured Projects</a>
+                <a href="../index.html#projects">Featured Projects</a>
                 <a href="../index.html#resume">Resume</a>
                 <a href="../index.html#contact">Contact</a>
                 <a href="../all-projects.html">All Projects</a>
@@ -183,7 +212,7 @@
                 </a>
             </div>
 
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-center">Automated Robotic Arm</h1> <!-- Restored original h1 style -->
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-center">Automated Robotic Arm</h1>
 
             <p class="text-xl mb-8">
                 This project involved the comprehensive design, simulation, and analysis of a 6-axis robotic arm, primarily focusing on pick-and-place operations in an industrial setting. The goal was to develop a robust and efficient robotic system capable of precise movements and payload handling.
@@ -191,14 +220,91 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 <div>
-                    <img src="https://placehold.co/800x600/7A431D/FFFFFF?text=Robotics+Arm+Image+1" alt="Robotics Arm Design" class="rounded-lg shadow-lg mb-4 w-full h-auto object-cover">
+                    <!-- Example of using your own image:
+                         Assuming 'robot-arm-design.jpg' is in the 'images' folder at the root of your repo.
+                         '../' goes up one level from 'projects/' to the root, then 'images/'
+                    -->
+                    <img src="../images/robot-arm-design.jpg" alt="Robotics Arm Design" class="rounded-lg shadow-lg mb-4 w-full h-auto object-cover">
                     <p class="text-sm text-gray-600 text-center">Initial CAD model of the robotic arm in SolidWorks.</p>
                 </div>
                 <div>
-                    <img src="https://placehold.co/800x600/563727/FFFFFF?text=Robotics+Arm+Image+2" alt="Robotics Arm Simulation" class="rounded-lg shadow-lg mb-4 w-full h-auto object-cover">
+                    <!-- Example of using another image: -->
+                    <img src="../images/robot-arm-simulation.png" alt="Robotics Arm Simulation" class="rounded-lg shadow-lg mb-4 w-full h-auto object-cover">
                     <p class="text-sm text-gray-600 text-center">Kinematic simulation of the arm's workspace in MATLAB.</p>
                 </div>
             </div>
+
+            <!-- YouTube Video Embed Example -->
+            <h3 class="text-2xl font-bold mb-4">Project Video:</h3>
+            <div class="embed-responsive-container">
+                <!-- Replace the iframe content below with your actual YouTube embed code.
+                     You can get this from YouTube by clicking 'Share' -> 'Embed'.
+                     Ensure 'width' and 'height' attributes are removed from the iframe tag
+                     so the CSS can make it responsive.
+                -->
+                <iframe src="https://www.youtube.com/embed/your-video-id"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <!-- End YouTube Video Embed Example -->
+
+            <!-- PDF Embed Example -->
+            <h3 class="text-2xl font-bold mb-4">Project Report (PDF):</h3>
+            <div class="embed-responsive-container embed-responsive-pdf">
+                <!-- Option 1: Direct PDF embed (relies on browser's built-in viewer) -->
+                <!-- Replace 'path/to/your/document.pdf' with the actual path to your PDF file.
+                     If your PDF is in the root 'documents' folder, and this page is in 'projects/',
+                     the path would be like '../documents/your-report.pdf'
+                -->
+                <iframe src="../documents/your-project-report.pdf" type="application/pdf"
+                        title="Embedded Project Report PDF"
+                        frameborder="0"
+                        allowfullscreen>
+                </iframe>
+
+                <!-- Option 2: Google Docs Viewer for PDF (recommended for consistency) -->
+                <!-- Replace 'https://yourwebsite.com/your-project-report.pdf' with the PUBLIC URL of your PDF.
+                     This PDF must be accessible online for Google Docs Viewer to work.
+                -->
+                <!--
+                <iframe src="https://docs.google.com/viewer?url=https://yourwebsite.com/your-project-report.pdf&embedded=true"
+                        title="Embedded Project Report PDF via Google Docs Viewer"
+                        frameborder="0"
+                        allowfullscreen>
+                </iframe>
+                -->
+            </div>
+            <!-- End PDF Embed Example -->
+
+            <!-- Google Presentation / PowerPoint Embed Example -->
+            <h3 class="text-2xl font-bold mb-4">Project Presentation:</h3>
+            <div class="embed-responsive-container">
+                <!-- Replace the iframe content below with your actual Google Slides or Microsoft PowerPoint embed code.
+                     Make sure to remove any 'width' or 'height' attributes from the iframe tag
+                     that are provided by Google/Microsoft, as our CSS handles responsiveness.
+                -->
+                <iframe src="https://docs.google.com/presentation/d/e/YOUR_GOOGLE_SLIDES_ID/embed?start=false&loop=false&delayms=3000"
+                        title="Embedded Project Presentation"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        mozallowfullscreen="true"
+                        webkitallowfullscreen="true">
+                </iframe>
+                <!-- Example for Microsoft PowerPoint (from OneDrive):
+                <iframe src="https://onedrive.live.com/embed?cid=YOUR_CID&resid=YOUR_RESID%21YOUR_FILEID&authkey=!YOUR_AUTHKEY&em=2"
+                        title="Embedded Project Presentation"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        mozallowfullscreen="true"
+                        webkitallowfullscreen="true">
+                </iframe>
+                -->
+            </div>
+            <!-- End Google Presentation / PowerPoint Embed Example -->
 
             <div class="prose max-w-none text-xl leading-relaxed">
                 <h3 class="text-2xl font-bold mb-4">Key Features & Technologies:</h3>

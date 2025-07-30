@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Automated Robotic Arm - Joon Kim</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom CSS variables for the new color palette */
+        :root {
+            --color-dark-brown-taupe: #563727;
+            --color-dark-grey-brown: #372C2E;
+            --color-white: #FFFFFF;
+            --color-goldenrod-orange-gold: #DE9E48;
+            --color-medium-brown: #7A431D;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Global styles using custom properties and Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-white); /* Clean white background */
+            color: var(--color-dark-brown-taupe); /* Primary text color */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0; /* Lighter track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-goldenrod-orange-gold);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-medium-brown);
+        }
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: var(--color-dark-grey-brown); /* Dark nav */
+            color: var(--color-white);
+        }
+        nav a {
+            color: var(--color-white); /* Nav links */
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+        }
+        nav a:hover {
+            color: var(--color-goldenrod-orange-gold); /* Nav links hover */
+            transform: scale(1.05); /* Increased size on hover */
+            box-shadow: var(--shadow-light); /* Subtle shadow on hover */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--color-dark-brown-taupe); /* Heading color */
+            font-weight: 700; /* Bolder headings */
+        }
+
+        /* Project detail specific styles */
+        .project-detail-section {
+            background-color: var(--color-white);
+        }
+        .project-detail-section h1 {
+            color: var(--color-dark-brown-taupe); /* Main title */
+            font-weight: 700;
+        }
+        .project-detail-section .btn-back {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .project-detail-section .btn-back:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .project-detail-section .tag {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown);
+            font-weight: 500;
+        }
+        .project-detail-section h3 {
+            color: var(--color-medium-brown); /* Sub-headings within project details */
+            font-weight: 600;
+        }
+        .project-detail-section .btn-project-link {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .project-detail-section .btn-project-link:hover {
+            background-color: var(--color-jet-black);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Fading Background Section */
+        .fading-background {
+            height: 200px; /* Adjusted height for the background image */
+            background-image: url('https://placehold.co/1200x600/7A431D/FFFFFF?text=Project+Background'); /* Placeholder image, replace with your actual project image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden; /* Hide overflow from mask */
+
+            /* Masking for the fade effect */
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+        }
+        footer a {
+            color: var(--color-goldenrod-orange-gold);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+            display: inline-block; /* Required for transform on inline elements */
+            padding: 4px; /* Add padding for better hover area */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+        footer a:hover {
+            color: var(--color-white);
+            transform: scale(1.1); /* Slightly larger scale for footer icons */
+            box-shadow: var(--shadow-light); /* Subtle shadow on hover */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-3xl font-bold">Joon Kim</a>
+            <div class="hidden md:flex space-x-8 text-xl">
+                <a href="../index.html#about">About</a>
+                <a href="../index.1html#projects">Featured Projects</a>
+                <a href="../index.html#resume">Resume</a>
+                <a href="../index.html#contact">Contact</a>
+                <a href="../all-projects.html">All Projects</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
+            <a href="../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="../index.html#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
+            <a href="../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+        </div>
+    </nav>
+
+    <!-- Fading Background Section for Project Image -->
+    <div class="fading-background">
+        <!-- The background image and fade effect are handled by CSS -->
+    </div>
+
+    <!-- Project Detail Content Section -->
+    <section class="project-detail-section py-16 md:py-24 pt-0">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="mb-8 -mt-20 relative z-20"> <!-- Negative margin to pull content up over the fade -->
+                <a href="../all-projects.html" class="btn-back inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+                </a>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-center">Automated Robotic Arm</h1> <!-- Restored original h1 style -->
+
+            <p class="text-xl mb-8">
+                This project involved the comprehensive design, simulation, and analysis of a 6-axis robotic arm, primarily focusing on pick-and-place operations in an industrial setting. The goal was to develop a robust and efficient robotic system capable of precise movements and payload handling.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <img src="https://placehold.co/800x600/7A431D/FFFFFF?text=Robotics+Arm+Image+1" alt="Robotics Arm Design" class="rounded-lg shadow-lg mb-4 w-full h-auto object-cover">
+                    <p class="text-sm text-gray-600 text-center">Initial CAD model of the robotic arm in SolidWorks.</p>
+                </div>
+                <div>
+                    <img src="https://placehold.co/800x600/563727/FFFFFF?text=Robotics+Arm+Image+2" alt="Robotics Arm Simulation" class="rounded-lg shadow-lg mb-4 w-full h-auto object-cover">
+                    <p class="text-sm text-gray-600 text-center">Kinematic simulation of the arm's workspace in MATLAB.</p>
+                </div>
+            </div>
+
+            <div class="prose max-w-none text-xl leading-relaxed">
+                <h3 class="text-2xl font-bold mb-4">Key Features & Technologies:</h3>
+                <ul class="list-disc list-inside mb-6 space-y-2">
+                    <li><strong>Design & Modeling:</strong> Utilized SolidWorks for 3D modeling and assembly, ensuring all components were accurately dimensioned and manufacturable.</li>
+                    <li><strong>Kinematics & Dynamics:</strong> Developed forward and inverse kinematic models in MATLAB to control arm movements and understand its operational envelope. Dynamic analysis was performed to assess motor requirements and joint loads.</li>
+                    <li><strong>Control System:</strong> Implemented a basic PID control loop for joint position control, simulated in Simulink.</li>
+                    <li><strong>FEA Analysis:</strong> Conducted Finite Element Analysis on critical components (e.g., arm links, base plate) using ANSYS to ensure structural integrity under various loading conditions.</li>
+                    <li><strong>Material Selection:</strong> Researched and selected appropriate materials (e.g., aluminum alloys for lightness and strength) to optimize performance and cost.</li>
+                </ul>
+
+                <h3 class="text-2xl font-bold mb-4">Challenges & Solutions:</h3>
+                <p class="mb-4">One of the primary challenges was achieving precise control over the arm's end-effector position, especially when handling varying payloads. This was addressed by refining the kinematic model and tuning the PID controller parameters through iterative simulations. Another challenge was minimizing vibrations during rapid movements, which was mitigated by optimizing the arm's geometry and considering damping properties of materials.</p>
+
+                <h3 class="text-2xl font-bold mb-4">Learnings:</h3>
+                <p class="mb-4">This project significantly enhanced my understanding of robotic system design, control theory, and the practical application of CAD/CAE tools. It also provided valuable experience in troubleshooting complex engineering systems and optimizing designs for specific performance criteria.</p>
+
+                <h3 class="text-2xl font-bold mb-4">Tools Used:</h3>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="tag text-sm px-3 py-1 rounded-full">SolidWorks</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">MATLAB</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Simulink</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">ANSYS</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Kinematics</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Control Systems</span>
+                </div>
+
+                <!-- Add links to project repository or demo if applicable -->
+                <div class="mt-8 text-center">
+                    <a href="https://github.com/yourgithub/robotic-arm-project" target="_blank" class="btn-project-link inline-flex items-center font-bold py-3 px-6 rounded-lg shadow-md">
+                        <i class="fab fa-github mr-2"></i> View Project on GitHub
+                    </a>
+                    <!-- <a href="https://yourprojectdemo.com" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md ml-4 transform hover:scale-105">
+                        <i class="fas fa-external-link-alt mr-2"></i> View Live Demo
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/yourgithub" target="_blank">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:your.email@example.com">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

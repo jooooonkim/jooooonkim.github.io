@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Interactive Drone Simulations of Dynamic Systems - Joon Kim</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom CSS variables for the new color palette */
+        :root {
+            --color-dark-brown-taupe: #563727;
+            --color-dark-grey-brown: #372C2E;
+            --color-white: #FFFFFF;
+            --color-goldenrod-orange-gold: #DE9E48;
+            --color-medium-brown: #7A431D;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Global styles using custom properties and Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-white); /* Clean white background */
+            color: var(--color-dark-brown-taupe); /* Primary text color */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0; /* Lighter track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-goldenrod-orange-gold);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-medium-brown);
+        }
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: var(--color-dark-grey-brown); /* Dark nav */
+            color: var(--color-white);
+        }
+        nav a {
+            color: var(--color-white); /* Nav links */
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+        }
+        nav a:hover {
+            color: var(--color-goldenrod-orange-gold); /* Nav links hover */
+            transform: scale(1.05); /* Increased size on hover */
+            box-shadow: var(--shadow-light); /* Subtle shadow on hover */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--color-dark-brown-taupe); /* Heading color */
+            font-weight: 700; /* Bolder headings */
+        }
+
+        /* Project detail specific styles */
+        .project-detail-section {
+            background-color: var(--color-white);
+        }
+        .project-detail-section h1 {
+            color: var(--color-dark-brown-taupe); /* Main title */
+            font-weight: 700;
+        }
+        .project-detail-section .btn-back {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .project-detail-section .btn-back:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .project-detail-section .tag {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown);
+            font-weight: 500;
+        }
+        .project-detail-section h3 {
+            color: var(--color-medium-brown); /* Sub-headings within project details */
+            font-weight: 600;
+        }
+        .project-detail-section .btn-project-link {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .project-detail-section .btn-project-link:hover {
+            background-color: var(--color-jet-black);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Fading Background Section */
+        .fading-background {
+            height: 200px; /* Adjusted height for the background image */
+            /* IMPORTANT: Replace with a relevant image for drone simulation */
+            background-image: url('../images/drone-simulation-hero.jpg'); /* Placeholder for drone image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden; /* Hide overflow from mask */
+
+            /* Masking for the fade effect */
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+
+        /* Responsive Embed Container (for videos, PDFs, presentations) */
+        .embed-responsive-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width = 9 / 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000; /* Fallback background for embeds */
+            border-radius: 0.5rem; /* Rounded corners for the container */
+            box-shadow: var(--shadow-medium); /* Subtle shadow for the embed */
+            margin-bottom: 2rem; /* Space below the embed */
+        }
+        .embed-responsive-container iframe,
+        .embed-responsive-container object,
+        .embed-responsive-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* Adjust aspect ratio for PDFs if they are typically taller (e.g., 8.5x11) */
+        .embed-responsive-pdf {
+            padding-bottom: 129%; /* Approx. 8.5x11 ratio (11/8.5 = 1.294) */
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+        }
+        footer a {
+            color: var(--color-goldenrod-orange-gold);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow transition */
+            display: inline-block; /* Required for transform on inline elements */
+            padding: 4px; /* Add padding for better hover area */
+            border-radius: 4px; /* Apply rounded corners for shadow */
+        }
+        footer a:hover {
+            color: var(--color-white);
+            transform: scale(1.1); /* Slightly larger scale for footer icons */
+            box-shadow: var(--shadow-light); /* Subtle shadow on hover */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-3xl font-bold">Joon Kim</a>
+            <div class="hidden md:flex space-x-8 text-xl">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Featured Projects</a>
+                <a href="../index.html#resume">Resume</a>
+                <a href="../index.html#contact">Contact</a>
+                <a href="../all-projects.html">All Projects</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
+            <a href="../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="../index.html#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
+            <a href="../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+        </div>
+    </nav>
+
+    <!-- Fading Background Section for Project Image -->
+    <div class="fading-background">
+        <!-- The background image and fade effect are handled by CSS -->
+    </div>
+
+    <!-- Project Detail Content Section -->
+    <section class="project-detail-section py-16 md:py-24 pt-0">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="mb-8 -mt-20 relative z-20"> <!-- Negative margin to pull content up over the fade -->
+                <a href="../all-projects.html" class="btn-back inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+                </a>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-center">Interactive Drone Simulations of Dynamic Systems</h1>
+
+            <p class="text-xl mb-8">
+                This project explores an innovative approach to understanding complex dynamic systems through interactive drone simulations. Utilizing a swarm of small, agile drones as physical models, users can manipulate system parameters in real-time using intuitive hand gestures via webcam-based hand tracking. The drones' movements directly influence the behavior of various dynamic systems, such as spring-mass-damper systems and pendulums, with their responses visualized instantly through interactive graphs. This platform offers a unique and engaging way to explore complex engineering concepts, bridging theoretical understanding with practical, real-time interaction.
+            </p>
+
+            <!-- YouTube Video Embed -->
+            <h3 class="text-2xl font-bold mb-4">Project Video:</h3>
+            <div class="embed-responsive-container">
+                <iframe src="https://www.youtube.com/embed/eYEBc6EHLo8"
+                        title="Interactive Drone Simulations of Dynamic Systems"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <!-- End YouTube Video Embed -->
+
+            <div class="prose max-w-none text-xl leading-relaxed">
+                <h3 class="text-2xl font-bold mb-4">Key Features & Technologies:</h3>
+                <ul class="list-disc list-inside mb-6 space-y-2">
+                    <li><strong>Drone-Based Dynamic System Simulation:</strong> Utilizes a swarm of small, agile drones to simulate dynamic systems (e.g., single and double mass-spring-damper systems, pendulum systems) modeled by differential equations.</li>
+                    <li><strong>Intuitive Hand Gesture Control:</strong> Achieved through Mediapipe with OpenCV and a standard webcam, allowing users to control drone position by "grabbing" and moving a drone, and releasing it to follow its differential equation model.</li>
+                    <li><strong>Real-time Interactive Visualization:</strong> Provides immediate graphical feedback of system responses, allowing users to observe the effects of their manipulations instantly. Includes options for visual overlay representations without drones.</li>
+                    <li><strong>Adjustable System Parameters:</strong> Users can modify constants such as spring, dampening, air resistance, length, and mass to observe their impact on system behavior.</li>
+                    <li><strong>Educational & Engaging Platform:</strong> Bridges the gap between theoretical models and hands-on learning, making complex concepts like oscillation, damping, and resonance tangible and immersive.</li>
+                </ul>
+
+                <h3 class="text-2xl font-bold mb-4">Challenges & Solutions:</h3>
+                <p class="mb-4">A significant challenge involved achieving precise and low-latency control from the webcam-based hand tracking to the simulated drone and subsequent dynamic system updates. This was addressed through careful optimization of data processing pipelines and fine-tuning of the simulation loop to ensure real-time responsiveness. Another hurdle was designing intuitive visual feedback for complex system behaviors, which was overcome by developing clear, interactive graphical representations that update seamlessly with user input.</p>
+
+                <h3 class="text-2xl font-bold mb-4">Learnings:</h3>
+                <p class="mb-4">This project provided invaluable experience in interdisciplinary integration, combining principles of control systems, real-time simulation, and human-computer interaction. It deepened my understanding of how to translate abstract engineering concepts into tangible, interactive experiences and highlighted the importance of user-centric design in technical applications.</p>
+
+                <h3 class="text-2xl font-bold mb-4">Tools Used:</h3>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="tag text-sm px-3 py-1 rounded-full">OpenCV</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Mediapipe Handtracking</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Crazyflie Drones</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Python</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Dynamic Systems Modeling</span>
+                    <span class="tag text-sm px-3 py-1 rounded-full">Control Theory</span>
+                </div>
+
+                <!-- Add links to project repository or demo if applicable -->
+                <div class="mt-8 text-center">
+                    <a href="https://github.com/yourgithub/drone-simulation-project" target="_blank" class="btn-project-link inline-flex items-center font-bold py-3 px-6 rounded-lg shadow-md">
+                        <i class="fab fa-github mr-2"></i> View Project on GitHub
+                    </a>
+                    <!-- If there's a live demo, uncomment and update this link -->
+                    <!--
+                    <a href="https://yourprojectdemo.com/drone-simulation" target="_blank" class="btn-project-link inline-flex items-center font-bold py-3 px-6 rounded-lg shadow-md ml-4">
+                        <i class="fas fa-external-link-alt mr-2"></i> View Live Demo
+                    </a>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/yourgithub" target="_blank">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:your.email@example.com">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

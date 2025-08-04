@@ -64,11 +64,31 @@
 
         /* Hero Section background and colors */
         .hero-section {
-            background-color: var(--color-dark-grey-brown); /* Dark background for hero */
+            background-color: var(--color-dark-grey-brown); /* Fallback background for hero */
             color: var(--color-white); /* Text on hero */
             position: relative;
             overflow: hidden;
+            display: flex; /* Use flexbox to center content */
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh; /* Ensure it takes up enough vertical space */
         }
+
+        /* Video background styling */
+        .hero-section video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1; /* Below content, above overlay */
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Ensures video covers the entire area */
+        }
+
+        /* Overlay for darkening the video */
         .hero-section::before {
             content: '';
             position: absolute;
@@ -76,10 +96,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.05) 0%, transparent 50%),
-                        radial-gradient(circle at bottom right, rgba(255,255,255,0.05) 0%, transparent 50%);
-            opacity: 0.8;
+            background-color: var(--color-dark-grey-brown); /* Dark brown overlay */
+            opacity: 0.7; /* Adjust opacity to control darkness */
+            z-index: 2; /* Between video and content */
         }
+
+        /* Content within hero section should be above video and overlay */
+        .hero-content {
+            position: relative;
+            z-index: 3; /* Ensures content is on top */
+            text-align: center;
+            padding: 2rem; /* Add some padding */
+        }
+
         .hero-section h1 {
             color: var(--color-goldenrod-orange-gold); /* Hero title accent */
         }
@@ -227,8 +256,15 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section py-20 md:py-32 text-center">
-        <div class="container mx-auto px-6">
+    <section id="home" class="hero-section py-20 md:py-32">
+        <!-- Background Video -->
+        <video autoplay loop muted playsinline poster="images/hero-video-poster.jpg">
+            <source src="images/square-and-full-hero.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Hero Content (Photo, Name, Title) -->
+        <div class="hero-content">
             <img src="images/temp-sapporo-joon.png" alt="Sapporo Joon"
                  class="w-36 h-36 rounded-full mx-auto mb-6 shadow-lg border-4 border-white object-cover">
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4">Joon Kim</h1>
@@ -322,7 +358,6 @@
             <a href="your-resume.pdf" target="_blank" class="btn-download py-3 px-8 rounded-full shadow-lg inline-flex items-center">
                 <i class="fas fa-download mr-2"></i> Download Resume (PDF)
             </a>
-            <!-- replace "your-resume.pdf" with the actual link to your resume PDF file -->
         </div>
     </section>
 

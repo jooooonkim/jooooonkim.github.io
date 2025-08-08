@@ -129,10 +129,6 @@
         .aspect-ratio-4-3 {
             padding-bottom: 75%; /* 3 / 4 = 0.75 */
         }
-        /* Custom aspect ratio for 3:4 images/videos */
-        .aspect-ratio-3-4 {
-            padding-bottom: 133.33%; /* 4 / 3 = 1.3333 */
-        }
 
         /* Download Button style (similar to btn-download on index.html) */
         .btn-download-project {
@@ -235,25 +231,25 @@
                 <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
                     <div class="w-full md:w-1/2 relative aspect-ratio-4-3">
                         <img src="images/ez-final-1.jpg"
-                             alt="EZ-Fold Chair Final Render 1 (4:3)"
+                             alt="EZ-Fold Chair Final Render 1"
                              class="absolute inset-0 w-full h-full object-cover project-image">
                     </div>
                     <div class="w-full md:w-1/2 relative aspect-ratio-4-3">
                         <img src="images/ez-final-2.jpg"
-                             alt="EZ-Fold Chair Final Render 2 (4:3)"
+                             alt="EZ-Fold Chair Final Render"
                              class="absolute inset-0 w-full h-full object-cover project-image">
                     </div>
                 </div>
                 <!-- Bottom Row: Two 3:4 images side by side -->
                 <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0">
-                    <div class="w-full md:w-1/2 relative aspect-ratio-3-4">
+                    <div class="w-full md:w-1/2 relative aspect-ratio-4-3">
                         <img src="images/ez-final-3.jpg"
-                             alt="EZ-Fold Chair Final Render 3 (3:4)"
+                             alt="EZ-Fold Chair Final Render 3"
                              class="absolute inset-0 w-full h-full object-cover project-image">
                     </div>
-                    <div class="w-full md:w-1/2 relative aspect-ratio-3-4">
+                    <div class="w-full md:w-1/2 relative aspect-ratio-4-3">
                         <img src="images/ez-final-4.jpg"
-                             alt="EZ-Fold Chair Final Render 4 (3:4)"
+                             alt="EZ-Fold Chair Final Render 4"
                              class="absolute inset-0 w-full h-full object-cover project-image">
                     </div>
                 </div>
@@ -312,23 +308,20 @@
                 </div>
             </div>
 
+
             <!-- Exploration of Ideas -->
             <div class="bg-gray-100 p-8 rounded-lg shadow-md mb-8">
                 <h3 class="text-3xl mb-4">Exploration of Ideas</h3>
-                <div class="flex flex-col md:flex-row md:space-x-8 items-start">
-                    <div class="md:w-1/2 flex flex-col space-y-4 mb-6 md:mb-0">
-                        <img src="images/ez-exploration-1.jpg"
-                             alt="Screenshot of IA page 6 (Exploration of Ideas 1)"
-                             class="w-full project-image object-cover">
-                        <img src="images/ez-exploration-2.jpg"
-                             alt="Screenshot of IA page 7 (Exploration of Ideas 2)"
-                             class="w-full project-image object-cover">
-                    </div>
-                    <div class="md:w-1/2 text-lg">
-                        <p class="mb-4">
-                            The initial phase of idea generation involved brainstorming without immediate constraints, allowing for a wide range of creative solutions. This open exploration aimed to capture diverse concepts for the chair's folding mechanisms, support structures, and overall form. Various sketches and preliminary concepts were documented to explore different approaches to the problem.
-                        </p>
-                    </div>
+                <p class="text-lg mb-4">
+                    The initial phase of idea generation involved brainstorming without immediate constraints, allowing for a wide range of creative solutions. This open exploration aimed to capture diverse concepts for the chair's folding mechanisms, support structures, and overall form. Various sketches and preliminary concepts were documented to explore different approaches to the problem.
+                </p>
+                <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0 mt-6">
+                    <img src="images/ez-exploration-1.jpg"
+                         alt="Screenshot of IA page 6 (Exploration of Ideas 1)"
+                         class="w-full md:w-1/2 project-image object-cover">
+                    <img src="images/ez-exploration-2.jpg"
+                         alt="Screenshot of IA page 7 (Exploration of Ideas 2)"
+                         class="w-full md:w-1/2 project-image object-cover">
                 </div>
             </div>
 
@@ -359,14 +352,16 @@
                 </div>
             </div>
 
+
             <!-- Final Detailed Design & Components -->
             <div class="bg-gray-100 p-8 rounded-lg shadow-md mb-8">
                 <h3 class="text-3xl mb-4">Orthographic Assembly Drawing</h3>
                 <p class="text-lg mb-4">
                     The final design of the EZ-Fold Chair is a culmination of iterative development and rigorous analysis, incorporating the most successful elements from previous concepts. Key components and materials were meticulously selected for durability, safety, and user comfort.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <!-- Key Components (now takes 1/3 or full width on small screens) -->
+                    <div class="lg:col-span-1">
                         <h4 class="text-2xl font-semibold mb-3">Key Components:</h4>
                         <ul class="list-disc list-inside space-y-2 text-lg">
                             <li><strong>Seat Cushioning:</strong> Faux leather and polyurethane foam for comfort and durability.</li>
@@ -378,20 +373,20 @@
                             <li><strong>Joining Components:</strong> Screws, nuts & bolts, and stainless steel U-brackets for strong, disassemblable connections.</li>
                         </ul>
                     </div>
-                    <div class="flex flex-col space-y-4">
-                        <h4 class="text-2xl font-semibold mb-3">Assembly Views:</h4>
+                    <!-- Assembly Views -->
+                    <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <img src="images/ez-assembly-exploded.jpg"
-                             alt="Exploded View Render" class="project-image">
+                             alt="Exploded View Drawing" class="project-image">
                         <img src="images/ez-assembly-1.jpg"
                              alt="Full Assembly Drawing" class="project-image">
-                        <img src="ez-assembly-2.jpg"
+                        <img src="images/ez-assembly-2.jpg"
                              alt="Seat Component Assembly Drawing" class="project-image">
-                        <img src="ez-assembly-3.jpg"
+                        <img src="images/ez-assembly-3.jpg"
                              alt="Chair Base Component Assembly Drawing" class="project-image">
-                        <img src="ez-assembly-4.jpg"
+                        <img src="images/ez-assembly-4.jpg"
                              alt="Base Peg Component Assembly Drawing" class="project-image">
-                        <img src="ez-assembly-5.jpg"
-                             alt="Base Peg Component Assembly Drawing" class="project-image">    
+                        <img src="images/ez-assembly-5.jpg"
+                             alt="Back Bracket Component Assembly Drawing" class="project-image">
                     </div>
                 </div>
             </div>

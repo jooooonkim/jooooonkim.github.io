@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joon Kim - Machining Air Piston Project</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom CSS variables for the new color palette */
+        :root {
+            --color-dark-brown-taupe: #563727;
+            --color-dark-grey-brown: #372C2E;
+            --color-white: #FFFFFF;
+            --color-goldenrod-orange-gold: #DE9E48;
+            --color-medium-brown: #7A431D;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Global styles using custom properties and Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-white); /* Clean white background */
+            color: var(--color-dark-brown-taupe); /* Primary text color */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0; /* Lighter track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-goldenrod-orange-gold);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-medium-brown);
+        }
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: var(--color-dark-grey-brown); /* Dark nav */
+            color: var(--color-white);
+        }
+        nav a {
+            color: var(--color-white); /* Nav links */
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        nav a:hover {
+            color: var(--color-goldenrod-orange-gold); /* Nav links hover */
+            transform: scale(1.05);
+            box-shadow: var(--shadow-light);
+            border-radius: 4px;
+        }
+        
+        /* Fading Background Section for Project Image */
+        .fading-background {
+            height: 200px;
+            /* Placeholder image for Air Piston header */
+            background-image: url('../../images/temp-air-piston-small.jpg'); /* Placeholder, replace with actual image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden; /* Hide overflow from mask */
+            
+            /* Masking for the fade effect */
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+
+        /* General button styles */
+        .btn-primary {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: var(--color-medium-brown);
+            color: var(--color-white);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--color-dark-brown-taupe); /* Heading color */
+            font-weight: 700; /* Bolder headings */
+        }
+        h3 {
+            color: var(--color-medium-brown);
+            font-weight: 600;
+        }
+        
+        /* Image styling */
+        .project-image {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Video container for aspect ratio */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        .video-container-portrait {
+            padding-bottom: 133.33%; /* 3:4 aspect ratio */
+        }
+        /* Custom aspect ratio for 4:3 images/videos */
+        .aspect-ratio-4-3 {
+            padding-bottom: 75%; /* 3 / 4 = 0.75 */
+        }
+        /* Custom aspect ratio for 3:4 images/videos */
+        .aspect-ratio-3-4 {
+            padding-bottom: 133.33%; /* 4 / 3 = 1.3333 */
+        }
+        /* Custom aspect ratio for 3:2 images/videos */
+        .aspect-ratio-3-2 {
+            padding-bottom: 66.66%; /* 2 / 3 = 0.6666 */
+        }
+
+        /* Download Button style (similar to btn-download on index.html) */
+        .btn-download-project {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+            margin-top: 1.5rem; /* mt-6 */
+        }
+        .btn-download-project:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+        }
+        footer a {
+            color: var(--color-goldenrod-orange-gold);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: inline-block;
+            padding: 4px;
+            border-radius: 4px;
+        }
+        footer a:hover {
+            color: var(--color-white);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-light);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../../index.html" class="text-3xl font-bold">Joon Kim</a>
+            <div class="hidden md:flex space-x-8 text-xl">
+                <a href="../../index.html#about">About</a>
+                <a href="../../index.html#projects">Featured Projects</a>
+                <a href="../../index.html#resume">Resume</a>
+                <a href="../../index.html#contact">Contact</a>
+                <a href="../../all-projects.html">All Projects</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
+            <a href="../../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="../../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="../../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="../../index.html#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
+            <a href="../../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+        </div>
+    </nav>
+
+    <!-- Fading Background Section -->
+    <div class="fading-background">
+        <!-- The background image and fade effect are handled by CSS -->
+    </div>
+    
+    <main class="py-16 md:py-24 pt-0">
+        <!-- Project Header Section (with overlapping content) -->
+        <section class="container mx-auto px-6 max-w-6xl">
+            <div class="mb-8 -mt-20 relative z-20 text-left">
+                <a href="../../all-projects.html" class="btn-primary inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+                </a>
+            </div>
+            <div class="text-center mb-8">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4" style="color: var(--color-dark-brown-taupe);">Machining Air Piston</h1>
+                <p class="text-2xl md:text-3xl font-medium max-w-3xl mx-auto">
+                    This project involved the meticulous design and fabrication of a functional air piston from steel, demonstrating advanced machining skills, precision, and an in-depth understanding of industrial manufacturing processes.
+                </p>
+                <!-- No PDF downloads mentioned for this project, so remove buttons -->
+            </div>
+        </section>
+
+        <!-- CAD Design Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">CAD Design</h2>
+            <div class="w-full video-container mb-8">
+                <!-- Landscape Video: CAD model design -->
+                <iframe src="https://www.youtube.com/embed/xRMfrbfuD10"
+                        title="Air Piston CAD Design"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-lg text-center max-w-3xl mx-auto">
+                The air piston project began with comprehensive CAD modeling, where every component was precisely designed to ensure functionality and manufacturability. This phase was crucial for planning the intricate geometries and tolerances required for each part.
+            </p>
+        </section>
+
+        <!-- Detailed Component Designs Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Detailed Component Drawings</h2>
+            <p class="text-lg mb-8 text-center max-w-3xl mx-auto">
+                Seven individual components comprised the air piston, each requiring specific machining operations. These technical drawings illustrate the precise dimensions, features, and tolerances that guided the fabrication process. Careful consideration of each part's form, holes, and overall shape was paramount to ensuring the final assembly's functionality.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Assuming 7 technical drawing images -->
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-1.jpg" alt="Air Piston Component Drawing 1" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-2.jpg" alt="Air Piston Component Drawing 2" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-3.jpg" alt="Air Piston Component Drawing 3" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-4.jpg" alt="Air Piston Component Drawing 4" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-5.jpg" alt="Air Piston Component Drawing 5" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-6.jpg" alt="Air Piston Component Drawing 6" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/piston-drawing-7.jpg" alt="Air Piston Component Drawing 7" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Fabrication Process & Precision Machining Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Fabrication Process & Precision Machining</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 text-lg mb-6 md:mb-0">
+                    <p class="mb-4">
+                        The air piston components were meticulously machined from steel, employing a variety of techniques including milling and lathe operations. This hands-on process was a testament to my ability to utilize these complex machines with precision.
+                    </p>
+                    <p class="mb-4">
+                        A critical learning aspect of this project was understanding the overall machining process. Significant time was dedicated to planning the sequence of operations for each part – determining when to cut sides, when to drill specific holes, and the exact order of each step. This meticulous planning was essential to achieve the required precision and minimize material waste.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <!-- Portrait Video: Machining timelapse (3:4 ratio) -->
+                    <div class="w-full video-container video-container-portrait max-w-sm mx-auto">
+                        <iframe src="https://youtube.com/embed/Ltm9tQc7qQA"
+                                title="Air Piston Machining Timelapse"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final product and conclusions Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Final product and Conclusions</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-center mb-8">
+                <div class="md:w-1/2 flex justify-center items-center mb-6 md:mb-0">
+                    <!-- Single Portrait Video: Air piston working (3:4 ratio) -->
+                    <div class="w-full video-container video-container-portrait max-w-sm">
+                        <iframe src="https://youtube.com/embed/3VSBNkM_Rxw"
+                                title="Air Piston Working Demonstration"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="md:w-1/2 text-lg">
+                    <p class="text-lg text-center md:text-left max-w-3xl md:max-w-none mx-auto">
+                        The culmination of the design and fabrication process resulted in a fully functional air piston. When connected to air, the piston successfully performs the intended reciprocating motion, demonstrating the precision achieved in its construction. This project underscored the immense importance of detailed planning and sequential execution in machining, particularly in the context of industrial mass production where efficiency and accuracy are paramount. The ability to foresee and optimize each step of the manufacturing process is a critical skill for a mechanical engineer aiming for large-scale industrial applications.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Projects Button -->
+        <section class="container mx-auto px-6 max-w-4xl text-center py-8">
+            <a href="../../all-projects.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+                <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.linkedin.com/in/jooooonkim" target="_blank">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/jooooonkim" target="_blank">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:joon.kim@cooper.edu">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

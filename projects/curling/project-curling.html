@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joon Kim - Curling Stone Motion Analysis</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom CSS variables for the new color palette */
+        :root {
+            --color-dark-brown-taupe: #563727;
+            --color-dark-grey-brown: #372C2E;
+            --color-white: #FFFFFF;
+            --color-goldenrod-orange-gold: #DE9E48;
+            --color-medium-brown: #7A431D;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Global styles using custom properties and Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-white); /* Clean white background */
+            color: var(--color-dark-brown-taupe); /* Primary text color */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0; /* Lighter track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-goldenrod-orange-gold);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-medium-brown);
+        }
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: var(--color-dark-grey-brown); /* Dark nav */
+            color: var(--color-white);
+        }
+        nav a {
+            color: var(--color-white); /* Nav links */
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        nav a:hover {
+            color: var(--color-goldenrod-orange-gold); /* Nav links hover */
+            transform: scale(1.05);
+            box-shadow: var(--shadow-light);
+            border-radius: 4px;
+        }
+        
+        /* Fading Background Section for Project Image */
+        .fading-background {
+            height: 200px;
+            /* Placeholder image for Curling header */
+            background-image: url('../../images/temp-curling-small.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden; /* Hide overflow from mask */
+            
+            /* Masking for the fade effect */
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+
+        /* General button styles */
+        .btn-primary {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: var(--color-medium-brown);
+            color: var(--color-white);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--color-dark-brown-taupe); /* Heading color */
+            font-weight: 700; /* Bolder headings */
+        }
+        h3 {
+            color: var(--color-medium-brown);
+            font-weight: 600;
+        }
+        
+        /* Image styling */
+        .project-image {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Video container for aspect ratio */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        .video-container-portrait {
+            padding-bottom: 177.77%; /* 9:16 aspect ratio */
+        }
+        /* Custom aspect ratio for 4:3 images/videos */
+        .aspect-ratio-4-3 {
+            padding-bottom: 75%; /* 3 / 4 = 0.75 */
+        }
+        /* Custom aspect ratio for 3:4 images/videos */
+        .aspect-ratio-3-4 {
+            padding-bottom: 133.33%; /* 4 / 3 = 1.3333 */
+        }
+        /* Custom aspect ratio for 3:2 images/videos */
+        .aspect-ratio-3-2 {
+            padding-bottom: 66.66%; /* 2 / 3 = 0.6666 */
+        }
+
+        /* Download Button style (similar to btn-download on index.html) */
+        .btn-download-project {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+            margin-top: 1.5rem; /* mt-6 */
+        }
+        .btn-download-project:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+        }
+        footer a {
+            color: var(--color-goldenrod-orange-gold);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: inline-block;
+            padding: 4px;
+            border-radius: 4px;
+        }
+        footer a:hover {
+            color: var(--color-white);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-light);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-3xl font-bold">Joon Kim</a>
+            <div class="hidden md:flex space-x-8 text-xl">
+                <a href="../../index.html#about">About</a>
+                <a href="../../index.html#projects">Featured Projects</a>
+                <a href="../../index.html#resume">Resume</a>
+                <a href="../../index.html#contact">Contact</a>
+                <a href="../../all-projects.html">All Projects</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
+            <a href="../../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="../../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="../../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="../../index.html#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
+            <a href="../../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+        </div>
+    </nav>
+
+    <!-- Fading Background Section -->
+    <div class="fading-background">
+        <!-- The background image and fade effect are handled by CSS -->
+    </div>
+    
+    <main class="py-16 md:py-24 pt-0">
+        <!-- Project Header Section (with overlapping content) -->
+        <section class="container mx-auto px-6 max-w-6xl">
+            <div class="mb-8 -mt-20 relative z-20 text-left">
+                <a href="../../all-projects.html" class="btn-primary inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+                </a>
+            </div>
+            <div class="text-center mb-8">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4" style="color: var(--color-dark-brown-taupe);">Dynamic Analysis and Modelling of Curling Stone Motion</h1>
+                <p class="text-2xl md:text-3xl font-medium max-w-3xl mx-auto">
+                    This project delves into the physics of curling, specifically analyzing the momentum and collision mechanics of curling stones. Using video motion-tracking (Tracker) and Python modeling, the study aims to understand the intricate interactions of stones and the governing physics. A secondary objective is to experimentally determine material properties: the coefficient of restitution between stones and the average friction of the rink.
+                </p>
+                <!-- Download buttons for the project report and presentation -->
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <a href="images/Joon Kim - ME200 Final Report.pdf" target="_blank" class="btn-download-project">
+                        <i class="fas fa-file-pdf mr-2"></i> Download Full Report (PDF)
+                    </a>
+                    <a href="images/Joon Kim - Dynamic Analysis and Modelling of Curling Stone Motion.pdf" target="_blank" class="btn-download-project">
+                        <i class="fas fa-file-pdf mr-2"></i> Download Presentation (PDF)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video of Interaction Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Olympic Curling Clip Analysis</h2>
+            <div class="w-full video-container mb-8">
+                <iframe src="https://www.youtube.com/embed/fXC1YxOgiGY"
+                        title="2018 PyeongChang Olympics Curling Clip"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-lg text-center max-w-3xl mx-auto">
+                This project centers on a specific clip from the gold medal match in the 2018 PyeongChang Olympics, depicting a scenario where one curling stone initiates a series of interactions among other stones, influencing their final positions and velocities. This video served as the primary experimental data source.
+            </p>
+        </section>
+
+        <!-- Curling Information & Assumptions Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Project Foundations: Information & Assumptions</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 flex flex-col space-y-4 mb-6 md:mb-0">
+                    <img src="images/curling-dimensions.jpg"
+                         alt="Curling Rink and Stone Dimensions"
+                         class="w-full project-image object-cover">
+                </div>
+                <div class="md:w-1/2 text-lg">
+                    <h3 class="text-3xl mb-4">Curling Info & Problem Statement</h3>
+                    <p class="mb-4">
+                        The physics behind curling stone interactions holds immense practical importance for optimizing gameplay. Players often predict stone motions and collisions to enhance their strategy, highlighting the significant role of physics in this sport. This study aims to model these interactions to understand their effects on stone trajectories and placements, and experimentally determine the coefficient of restitution and average rink friction.
+                    </p>
+                    <h3 class="text-3xl mb-4 mt-6">Assumptions and Simplifications</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Geometry:</strong> Stones are simplified to 2D circular projections, justified by the widest collision band.</li>
+                        <li><strong>Friction:</strong> Assumed constant and small, negligible for short interactions due to no sweeping in the video.</li>
+                        <li><strong>Air Drag:</strong> Disregarded due to relatively slow velocities and short distances.</li>
+                        <li><strong>Center of Mass (COM):</strong> Assumed to coincide with the center of the granite disc.</li>
+                        <li><strong>Coefficient of Restitution (e):</strong> Utilized as a constant for all standard curling stones and interactions.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tracker Analysis Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Tracker: Data Acquisition & Analysis</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 flex flex-col space-y-4 mb-6 md:mb-0">
+                    <img src="images/axis.jpg"
+                         alt="Tracker Axis Setup for Motion Tracking"
+                         class="w-full project-image object-cover">
+                    <img src="images/abc-stones.jpg"
+                         alt="Tracker Denotation of Stones A, B, C"
+                         class="w-full project-image object-cover">
+                </div>
+                <div class="md:w-1/2 text-lg">
+                    <p class="mb-4">
+                        The video clip was imported into Tracker. To account for the moving and zooming camera, the center, top-edge, and right-edge of the largest field circle were tracked. The origin was affixed to the center, with calibration sticks of 1.829m length. This created an axis system fixed on real-world elements, evolving with the camera for accuracy.
+                    </p>
+                    <p class="mb-4">
+                        The position of each stone (A, B, C) was tracked using its center of mass. Data for time, x, and y displacement was exported for Python analysis. For angular motion, new axes were set at the CoM of each stone, and a point on the edge of each stone was tracked to obtain angle vs. time data.
+                    </p>
+                    <p class="mb-4">
+                        Linear and angular velocities were calculated by splitting data into pre- and post-collision periods, approximating Riemann Sums for instantaneous velocities, and taking the mean.
+                    </p>
+                </div>
+            </div>
+            
+            <h3 class="text-3xl mb-4 mt-6">Coefficient of Restitution & Friction</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <div class="relative w-full aspect-ratio-4-3"> <!-- Ensure proper aspect ratio for container -->
+                    <img src="images/coefficient-of-restitution.jpg"
+                         alt="Tracker COR Axes Configuration"
+                         class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3"> <!-- Ensure proper aspect ratio for container -->
+                    <img src="images/friction.jpg"
+                         alt="Tracker Stone A Motion for Friction Calculation"
+                         class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+            </div>
+            <p class="text-lg mt-4">
+                Collision 1 (A hitting B) was isolated to estimate the coefficient of restitution. A new axis was created at the combined center of mass, with its normal axis intersecting the centroids of the stones at collision. Velocities were split into normal and tangential components for calculation. The average coefficient of kinetic friction was estimated by isolating Stone A's motion post-collision until rest. Using its instantaneous velocity after collision and the time it came to rest, the required acceleration and thus average frictional force were calculated.
+            </p>
+
+            <div class="mt-8">
+                <h3 class="text-3xl mb-4">Tracker-Generated Motion Plots:</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Assumed these are portrait images representing motion data -->
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/motion-a.jpg" alt="Tracker Stone A Motion" class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/motion-b.jpg" alt="Tracker Stone B Motion" class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/motion-c.jpg" alt="Tracker Stone C Motion" class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-3xl mb-4">Tracker-Generated Angular Motion Plots:</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Assumed these are portrait images representing angular motion data -->
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/angular-motion-a.jpg" alt="Tracker Stone A Angular Motion" class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/angular-motion-b.jpg" alt="Tracker Stone B Angular Motion" class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/angular-motion-c.jpg" alt="Tracker Stone C Angular Motion" class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-3xl mb-4 text-center">Tracker-Generated Values:</h3>
+                <img src="images/tracker-table.jpg"
+                     alt="Tracker Generated Values Table"
+                     class="w-full md:w-1/2 project-image object-contain mx-auto">
+            </div>
+        </section>
+
+        <!-- Python Modeling Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Python Modeling: Simulation & Analysis</h2>
+
+            <h3 class="text-3xl mb-4">Mode of Analysis & Equations of Motion</h3>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 text-lg mb-6 md:mb-0">
+                    <p class="mb-4">
+                        The overarching analysis lens is that of an oblique central impact, occurring at both collisions. The impulse-momentum diagram (Figure 1) illustrates Collision 1 (A-B). Since the momenta of the system are analyzed as a whole, internal impulsive forces during collision are neglected. Equations of motion derive from this diagram: tangential velocity is conserved, and normal momentum is conserved (given equal stone masses).
+                    </p>
+                    <p class="mb-4">
+                        The coefficient of restitution is applied along the normal axis. Due to the rigid body nature of the stones (rotating while translating), tracked center of mass velocities were converted to velocities at the point of contact. However, determining post-collision angular velocities without external information proved challenging, leading to an under-determined system.
+                    </p>
+                    <p class="mb-4">
+                        To properly constrain the system, post-collision angular velocities of Stone A after Collision 1 and Stone C after Collision 2 were introduced as additional knowns from Tracker data.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex flex-col space-y-4">
+                    <img src="images/impulse-diagram.jpg"
+                         alt="Impulse-Momentum Diagram"
+                         class="w-full project-image object-cover">
+                    <img src="images/rotation-issue.jpg"
+                         alt="Python Modeling Rotation Issue"
+                         class="w-full project-image object-cover">
+                </div>
+            </div>
+
+            <h3 class="text-3xl mb-4 mt-10">Rigid-Body Analysis</h3>
+            <div class="flex flex-col lg:flex-row lg:space-x-8 items-start">
+                <div class="lg:w-1/2 text-lg mb-6 lg:mb-0">
+                    <p class="mb-4">
+                        The rigid-body analysis model incorporated initial positions, initial linear and angular velocity of stone A, and the post-collision angular velocities of stone A and C as initial conditions. Normal and tangential components of velocity are calculated by defining a unit normal vector that intersects the centers of mass of the colliding stones. This vector is used in a dot product to determine the magnitude of the normal velocity component. The tangential component is then derived.
+                    </p>
+                    <p class="mb-4">
+                        The system of four equations and four unknowns (from oblique central impact principles) is then solved. Importantly, the calculated velocities are at the point of collision and must be converted to velocities at the center of mass by considering angular velocity. The final angular velocities are derived using the conservation of angular momentum. Velocities are then converted back to the x-y coordinate system for subsequent collision calculations.
+                    </p>
+                </div>
+                <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Image 1: Portrait (3:4) - Angular Rotation Issue Diagram/Equation from Presentation Page 13 -->
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/py1-nt-axis.jpg"
+                             alt="Python Modeling Rotation Issue"
+                             class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <!-- Image 2: Small Landscape (4:3) - N-T Axis Calculation from Presentation Page 14 -->
+                    <div class="relative w-full aspect-ratio-4-3">
+                        <img src="images/py2-nt-axis2.jpg"
+                             alt="Python Modeling N-T Axis Calculation"
+                             class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <!-- Image 3: Portrait (3:4) - Equations Solved (Python Code) from Presentation Page 16 -->
+                    <div class="relative w-full aspect-ratio-3-4">
+                        <img src="images/py3-4eq-4un.jpg"
+                             alt="Python Modeling Equations Solved"
+                             class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                    <!-- Image 4: Small Landscape (3:2) - Placeholder for a relevant small landscape image, e.g., Python output -->
+                    <div class="relative w-full aspect-ratio-3-2">
+                        <img src="images/py4-angular-velo-and-xy.jpg"
+                             alt="Small Landscape Placeholder 3:2"
+                             class="absolute inset-0 w-full h-full object-cover project-image">
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl mb-4 mt-10">Python Modeling: B travelling to C (Rigid Body)</h3>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 text-lg mb-6 md:mb-0">
+                    <p class="mb-4">
+                        After the first collision, the final velocity of Stone B (from the rigid-body analysis) was utilized to parametrize its trajectory: $x = -0.189 + t$ and $y = 0.629 - 3.46284t$. This calculated path, although slightly off from the real Tracker data, indicates Stone B's movement towards a second collision. The same Python code and process are then applied for the Stone B and C interaction with updated initial conditions.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex flex-col space-y-4">
+                    <!-- Portrait Video 2: Python Modeling: B travelling to C -->
+                    <div class="w-full video-container video-container-portrait max-w-sm mx-auto">
+                        <iframe src="https://www.youtube.com/embed/placeholder_curling_b_to_c_rigid_body_video"
+                                title="Curling Stone B to C (Rigid Body Model)"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl mb-4 mt-10">Python Modeling: B travelling to C, No Angular Momentum (Point-Mass)</h3>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 text-lg mb-6 md:mb-0">
+                    <p class="mb-4">
+                        Tracker data revealed that the angular velocities of the curling stones did not consistently obey the conservation of angular momentum, suggesting an unaccounted torque (possibly from uneven ice friction). To address this, an alternative Python model was developed where angular velocity was neglected, treating stones as point masses. In this simplified model, final angular velocities are not calculated or considered in the final velocity calculations.
+                    </p>
+                    <p class="mb-4">
+                        The path of Stone B after the first collision is again calculated using a parametrized equation derived from its final velocity and position vectors. When comparing this model to the rigid-body analysis, neglecting angular motion yields a more accurate real-world trajectory, further emphasizing the unforeseen torque's impact over the simplification's inherent error.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex flex-col space-y-4">
+                    <!-- Portrait Video 3: Python Modeling: B travelling to C, no angular momentum -->
+                    <div class="w-full video-container video-container-portrait max-w-sm mx-auto">
+                        <iframe src="https://www.youtube.com/embed/placeholder_curling_b_to_c_point_mass_video"
+                                title="Curling Stone B to C (Point-Mass Model)"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-3xl mb-4 mt-10">Python Calculated Values:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <img src="images/rigidbody-table.jpg" alt="Python Rigid Body Calculated Values Table" class="w-full project-image object-contain">
+                <img src="images/pointmass-table.jpg" alt="Python Point Mass Calculated Values Table" class="w-full project-image object-contain">
+            </div>
+        </section>
+
+        <!-- Results and Discussion Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Results and Discussion</h2>
+            <p class="text-lg mb-4">
+                Figure 4 (below) provides a comparison between the projected trajectories of Stone B, calculated using Python, and its true path from Tracker data. Stone B was selected for this comparison because it was simulated from start to finish for both Collision 1 and 2.
+            </p>
+            <div class="flex justify-center mb-8">
+                <img src="images/all-tables.jpg"
+                     alt="Motion Comparison Tracker vs Python"
+                     class="w-full project-image object-cover max-w-2xl"> <!-- Adjusted max-width for better centering -->
+            </div>
+            <p class="text-lg mb-4">
+                Interestingly, the point-mass simplification yielded a trajectory much closer to the true path in both x and y motion, despite entirely ignoring rotational motion. While this simplification introduces some error, the rigid-body analysis, though theoretically more "correct," predicted a trajectory that deviated significantly more, including a complete change in velocity direction after Collision 2. This suggests that unaccounted-for torque within the system produced greater errors in the simulations than the simplification of ignoring rotation.
+            </p>
+            <h3 class="text-3xl mb-4 mt-8">Experimental vs. Actual Values:</h3>
+            <img src="images/coefficient-comparison.jpg" alt="Coefficient of Restitution and Kinetic Friction Comparison Table" class="w-full max-w-xl mx-auto project-image object-contain mb-8">
+            <p class="text-lg mb-4">
+                The experimentally calculated values for the coefficient of restitution and kinetic friction align well with accepted scientific literature values. This agreement, derived from principles of linear motion, further supports the conclusion that the bulk of trajectory errors are attributable to unforeseen conditions primarily affecting angular momenta.
+            </p>
+            <p class="text-lg mb-4">
+                In summary, the assumption of constant friction across the rink appears to be a significant source of error. Uneven friction distribution likely caused an increase in angular momentum after collisions. Future experimental setups should prioritize controlled ice surfaces. Other minor error sources included the video's low frame rate (affecting Tracker accuracy) and changing camera angles. An ideal setup would feature a high-frame-rate camera consistently perpendicular to the rink.
+            </p>
+        </section>
+
+
+        <!-- Back to Projects Button -->
+        <section class="container mx-auto px-6 max-w-4xl text-center py-8">
+            <a href="../../all-projects.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+                <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.linkedin.com/in/jooooonkim" target="_blank">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/jooooonkim" target="_blank">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:joon.kim@cooper.edu">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

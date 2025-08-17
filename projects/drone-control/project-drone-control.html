@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joon Kim - Motion Tracking Drone Control</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define custom CSS variables for the new color palette */
+        :root {
+            --color-dark-brown-taupe: #563727;
+            --color-dark-grey-brown: #372C2E;
+            --color-white: #FFFFFF;
+            --color-goldenrod-orange-gold: #DE9E48;
+            --color-medium-brown: #7A431D;
+            --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Global styles using custom properties and Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-white); /* Clean white background */
+            color: var(--color-dark-brown-taupe); /* Primary text color */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0; /* Lighter track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-goldenrod-orange-gold);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-medium-brown);
+        }
+
+        /* Navigation Bar styles */
+        nav {
+            background-color: var(--color-dark-grey-brown); /* Dark nav */
+            color: var(--color-white);
+        }
+        nav a {
+            color: var(--color-white); /* Nav links */
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        nav a:hover {
+            color: var(--color-goldenrod-orange-gold); /* Nav links hover */
+            transform: scale(1.05);
+            box-shadow: var(--shadow-light);
+            border-radius: 4px;
+        }
+        
+        /* Fading Background Section for Project Image */
+        .fading-background {
+            height: 200px;
+            /* Placeholder image for Drone Control header */
+            background-image: url('../../images/temp-drone-control-header.jpg'); /* Placeholder, replace with actual image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden; /* Hide overflow from mask */
+            
+            /* Masking for the fade effect */
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+        }
+
+        /* General button styles */
+        .btn-primary {
+            background-color: var(--color-goldenrod-orange-gold);
+            color: var(--color-dark-grey-brown);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: var(--color-medium-brown);
+            color: var(--color-white);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--color-dark-brown-taupe); /* Heading color */
+            font-weight: 700; /* Bolder headings */
+        }
+        h3 {
+            color: var(--color-medium-brown);
+            font-weight: 600;
+        }
+        
+        /* Image styling */
+        .project-image {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Video container for aspect ratio */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        .video-container-9-16 {
+            padding-bottom: 177.77%; /* 9:16 aspect ratio */
+        }
+        /* Custom aspect ratio for 4:3 images/videos */
+        .aspect-ratio-4-3 {
+            padding-bottom: 75%; /* 3 / 4 = 0.75 */
+        }
+        /* Custom aspect ratio for 3:4 images/videos */
+        .aspect-ratio-3-4 {
+            padding-bottom: 133.33%; /* 4 / 3 = 1.3333 */
+        }
+        /* Custom aspect ratio for 5:4 images/videos */
+        .aspect-ratio-5-4 {
+            padding-bottom: 80%; /* 4 / 5 = 0.8 */
+        }
+        /* Custom aspect ratio for 2:3 portrait images */
+        .aspect-ratio-2-3-portrait {
+            padding-bottom: 150%; /* 3 / 2 = 1.5 */
+        }
+        /* Custom aspect ratio for 3:2 images/videos */
+        .aspect-ratio-3-2 {
+            padding-bottom: 66.66%; /* 2 / 3 = 0.6666 */
+        }
+
+        /* Download Button style (similar to btn-download on index.html) */
+        .btn-download-project {
+            background-color: var(--color-dark-brown-taupe);
+            color: var(--color-white);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* shadow-lg */
+            margin-top: 1.5rem; /* mt-6 */
+        }
+        .btn-download-project:hover {
+            background-color: var(--color-medium-brown);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-grey-brown);
+            color: var(--color-white);
+        }
+        footer a {
+            color: var(--color-goldenrod-orange-gold);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: inline-block;
+            padding: 4px;
+            border-radius: 4px;
+        }
+        footer a:hover {
+            color: var(--color-white);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-light);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../../index.html" class="text-3xl font-bold">Joon Kim</a>
+            <div class="hidden md:flex space-x-8 text-xl">
+                <a href="../../index.html#about">About</a>
+                <a href="../../index.html#projects">Featured Projects</a>
+                <a href="../../index.html#resume">Resume</a>
+                <a href="../../index.html#contact">Contact</a>
+                <a href="../../all-projects.html">All Projects</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
+            <a href="../../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="../../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="../../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="../../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+        </div>
+    </nav>
+
+    <!-- Fading Background Section -->
+    <div class="fading-background">
+        <!-- The background image and fade effect are handled by CSS -->
+    </div>
+    
+    <main class="py-16 md:py-24 pt-0">
+        <!-- Project Header Section (with overlapping content) -->
+        <section class="container mx-auto px-6 max-w-6xl">
+            <div class="mb-8 -mt-20 relative z-20 text-left">
+                <a href="../../all-projects.html" class="btn-primary inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+                </a>
+            </div>
+            <div class="text-center mb-8">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4" style="color: var(--color-dark-brown-taupe);">Motion Tracking Drone Control</h1>
+                <p class="text-2xl md:text-3xl font-medium max-w-3xl mx-auto">
+                    This project developed a real-time drone control system using webcam-based hand motion tracking, translating hand gestures into drone commands via the Crazyflie Python API. Key achievements included integrating hand tracking with drone control, optimizing data communication, and implementing advanced maneuvers with enhanced stability and responsiveness.
+                </p>
+            </div>
+        </section>
+
+        <!-- Project Update Note Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--color-medium-brown);">Project Update Note:</h2>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 mb-8">
+                <!-- Left Image (5:4 Landscape) -->
+                <div class="w-full md:w-1/4 relative aspect-ratio-5-4 flex-shrink-0">
+                    <img src="images/drone-update-note-1.jpg"
+                         alt="Project Update Image 1"
+                         class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <!-- Text in the middle -->
+                <p class="text-xl font-medium md:w-1/2">
+                    This project focuses on the initial exploration of technology, combining hand tracking with drone swarm control. To see further developments and applications, check out "Interactive Drone Simulations of Dynamic Systems".
+                </p>
+                <!-- Right Image (5:4 Landscape) -->
+                <div class="w-full md:w-1/4 relative aspect-ratio-5-4 flex-shrink-0">
+                    <img src="images/drone-update-note-2.jpg"
+                         alt="Project Update Image 2"
+                         class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+            </div>
+            <!-- Button to next project -->
+            <a href="../drone-simulations/project-drone-simulations.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+                <i class="fas fa-arrow-right mr-2"></i> Explore Drone Simulations
+            </a>
+        </section>
+
+        <!-- Final Product Section (Moved to top) -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Final Product</h2>
+            <div class="w-full video-container mb-8">
+                <!-- Landscape Video: Final presentation video -->
+                <iframe src="https://www.youtube.com/embed/WsefjImsEwc"
+                        title="Final Presentation Video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-lg text-center max-w-3xl mx-auto">
+                The final iteration of the Motion Tracking Drone Control project achieved significant advancements in responsive and stable drone navigation. This demonstration highlights the culmination of our efforts in refining hand gesture interpretation, optimizing data flow, and implementing robust control algorithms to deliver a seamless and intuitive user experience.
+            </p>
+        </section>
+
+        <!-- Key Achievements Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Key Achievements</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                <div class="md:col-span-1 lg:col-span-1 text-lg bg-gray-100 p-6 rounded-lg shadow-md h-full flex flex-col justify-between">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">System Development</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Developed a real-time drone control system using webcam-based hand motion tracking.</li>
+                        <li>Utilized MediaPipe and Python to detect and interpret hand gestures.</li>
+                        <li>Translated hand gestures into drone commands via the Crazyflie Python API.</li>
+                    </ul>
+                </div>
+                <div class="md:col-span-1 lg:col-span-1 text-lg bg-gray-100 p-6 rounded-lg shadow-md h-full flex flex-col justify-between">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Integration & Optimization</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Successfully integrated hand tracking with drone control for intuitive navigation.</li>
+                        <li>Optimized real-time data communication between hand tracking and drone control scripts.</li>
+                        <li>Implemented advanced drone maneuvers with enhanced stability and responsiveness.</li>
+                    </ul>
+                </div>
+                <!-- Photo: Drones/hands/computer related to system -->
+                <div class="md:col-span-2 lg:col-span-1 relative w-full aspect-ratio-4-3 h-auto md:h-full flex-grow">
+                    <img src="images/drone-key-achievements-photo.jpg"
+                         alt="Drone Control System Setup"
+                         class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- VIP Showcase Section -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">VIP Showcase & Recognition</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-center justify-center">
+                <!-- Poster Image (2:3 Portrait) -->
+                <div class="md:w-1/3 flex-shrink-0 relative w-full aspect-ratio-2-3-portrait mb-8 md:mb-0">
+                    <img src="images/vip-showcase-poster.jpg"
+                         alt="Vertically Integrated Projects Spring Showcase Poster"
+                         class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="md:w-2/3 text-lg">
+                    <ul class="list-disc list-inside space-y-3 mb-6">
+                        <li>Presented the project at the prestigious VIP showcase event.</li>
+                        <li>Connected with numerous industry professionals and academics, fostering valuable networking opportunities.</li>
+                        <li>Received an invitation to present at additional showcase events, recognizing the project's innovative approach.</li>
+                        <li>Successfully secured additional funding to support continued research and development, enabling further advancements.</li>
+                        <li>Inspired to further develop the project based on overwhelmingly positive feedback and interest from attendees.</li>
+                    </ul>
+                    <!-- PDF Download Buttons for VIP Notes -->
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-6">
+                        <a href="documents/VIP2024_Spring_Project_Notes.pdf" target="_blank" class="btn-download-project text-sm md:text-base">
+                            <i class="fas fa-file-pdf mr-2"></i> Download VIP2024 Spring Notes
+                        </a>
+                        <a href="documents/VIP2023_Fall_Project_Notes.pdf" target="_blank" class="btn-download-project text-sm md:text-base">
+                            <i class="fas fa-file-pdf mr-2"></i> Download VIP2023 Fall Notes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Process Section (Renamed from Process & Iterations) -->
+        <section class="container mx-auto px-6 max-w-6xl mb-16">
+            <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Development Process</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8 items-start">
+                <div class="md:w-1/2 text-lg mb-6 md:mb-0 bg-gray-100 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4">Establishing Basic Control</h3>
+                    <p class="mb-4">
+                        The initial phase of the project focused on establishing a fundamental connection between hand tracking and drone control. This involved:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Establishing communication between the hand tracking system and the drone's API.</li>
+                        <li>Implementing simple thrust control, allowing the drone to move only up and down based on hand gestures.</li>
+                        <li>Operating without a sophisticated stabilization system, which provided foundational insights into real-time control challenges.</li>
+                    </ul>
+                    <p class="mt-4">
+                        This early test, while rudimentary, proved the feasibility of using hand gestures for direct drone manipulation and laid the groundwork for future development in stability and complex maneuver implementation.
+                    </p>
+                </div>
+                <div class="md:w-1/2 flex justify-center items-center">
+                    <!-- Portrait Video: Hand drone control test (9:16 aspect ratio) -->
+                    <div class="w-full video-container video-container-9-16 max-w-sm mx-auto">
+                        <iframe src="https://www.youtube.com/embed/5ULGgJH-35Y"
+                                title="Hand Drone Control Test"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+                <!-- Additional Project Photos -->
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/drone-photo-1.jpg" alt="Drone Project Photo 1" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/drone-photo-2.jpg" alt="Drone Project Photo 2" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/drone-photo-3.jpg" alt="Drone Project Photo 3" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+                <div class="relative w-full aspect-ratio-4-3">
+                    <img src="images/drone-photo-4.jpg" alt="Drone Project Photo 4" class="absolute inset-0 w-full h-full object-cover project-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Back to Projects Button -->
+        <section class="container mx-auto px-6 max-w-4xl text-center py-8">
+            <a href="../../all-projects.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+                <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://www.linkedin.com/in/jooooonkim" target="_blank">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/jooooonkim" target="_blank">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:joon.kim@cooper.edu">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (link.getAttribute('href').startsWith('#') || link.getAttribute('href').endsWith('.html')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

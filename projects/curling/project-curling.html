@@ -384,7 +384,7 @@
                          class="w-full project-image object-cover">
                 </div>
             </div>
-
+            
             <h3 class="text-3xl mb-4 mt-10">Rigid-Body Analysis</h3>
             <div class="flex flex-col lg:flex-row lg:space-x-8 items-start">
                 <div class="lg:w-1/2 text-lg mb-6 lg:mb-0">
@@ -396,33 +396,20 @@
                     </p>
                 </div>
                 <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- Image 1: Portrait (3:4) - Angular Rotation Issue Diagram/Equation from Presentation Page 13 -->
+                    <!-- Only two portrait images now -->
                     <div class="relative w-full aspect-ratio-3-4">
-                        <img src="images/py1-nt-axis.jpg"
-                             alt="Python Modeling Rotation Issue"
-                             class="absolute inset-0 w-full h-full object-cover project-image">
-                    </div>
-                    <!-- Image 2: Small Landscape (4:3) - N-T Axis Calculation from Presentation Page 14 -->
-                    <div class="relative w-full aspect-ratio-4-3">
-                        <img src="images/py2-nt-axis2.jpg"
+                        <img src="images/py1.jpg"
                              alt="Python Modeling N-T Axis Calculation"
                              class="absolute inset-0 w-full h-full object-cover project-image">
                     </div>
-                    <!-- Image 3: Portrait (3:4) - Equations Solved (Python Code) from Presentation Page 16 -->
                     <div class="relative w-full aspect-ratio-3-4">
-                        <img src="images/py3-4eq-4un.jpg"
+                        <img src="images/py2.jpg"
                              alt="Python Modeling Equations Solved"
-                             class="absolute inset-0 w-full h-full object-cover project-image">
-                    </div>
-                    <!-- Image 4: Small Landscape (3:2) - Placeholder for a relevant small landscape image, e.g., Python output -->
-                    <div class="relative w-full aspect-ratio-3-2">
-                        <img src="images/py4-angular-velo-and-xy.jpg"
-                             alt="Small Landscape Placeholder 3:2"
                              class="absolute inset-0 w-full h-full object-cover project-image">
                     </div>
                 </div>
             </div>
-
+            
             <h3 class="text-3xl mb-4 mt-10">Python Modeling: B travelling to C (Rigid Body)</h3>
             <div class="flex flex-col md:flex-row md:space-x-8 items-start">
                 <div class="md:w-1/2 text-lg mb-6 md:mb-0">
@@ -433,7 +420,7 @@
                 <div class="md:w-1/2 flex flex-col space-y-4">
                     <!-- Portrait Video 2: Python Modeling: B travelling to C -->
                     <div class="w-full video-container video-container-portrait max-w-sm mx-auto">
-                        <iframe src="https://www.youtube.com/embed/placeholder_curling_b_to_c_rigid_body_video"
+                        <iframe src="https://www.youtube.com/embed/shorts/fTwxipvgVFs"
                                 title="Curling Stone B to C (Rigid Body Model)"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -456,7 +443,7 @@
                 <div class="md:w-1/2 flex flex-col space-y-4">
                     <!-- Portrait Video 3: Python Modeling: B travelling to C, no angular momentum -->
                     <div class="w-full video-container video-container-portrait max-w-sm mx-auto">
-                        <iframe src="https://www.youtube.com/embed/placeholder_curling_b_to_c_point_mass_video"
+                        <iframe src="https://www.youtube.com/embed/Tezoahortuc"
                                 title="Curling Stone B to C (Point-Mass Model)"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -473,6 +460,7 @@
             </div>
         </section>
 
+        
         <!-- Results and Discussion Section -->
         <section class="container mx-auto px-6 max-w-6xl mb-16 bg-gray-100 p-8 rounded-lg shadow-md">
             <h2 class="text-4xl md:text-5xl text-center font-bold mb-10">Results and Discussion</h2>
@@ -482,13 +470,15 @@
             <div class="flex justify-center mb-8">
                 <img src="images/all-tables.jpg"
                      alt="Motion Comparison Tracker vs Python"
-                     class="w-full project-image object-cover max-w-2xl"> <!-- Adjusted max-width for better centering -->
+                     class="w-full project-image object-cover"> <!-- Removed max-w-2xl -->
             </div>
             <p class="text-lg mb-4">
                 Interestingly, the point-mass simplification yielded a trajectory much closer to the true path in both x and y motion, despite entirely ignoring rotational motion. While this simplification introduces some error, the rigid-body analysis, though theoretically more "correct," predicted a trajectory that deviated significantly more, including a complete change in velocity direction after Collision 2. This suggests that unaccounted-for torque within the system produced greater errors in the simulations than the simplification of ignoring rotation.
             </p>
             <h3 class="text-3xl mb-4 mt-8">Experimental vs. Actual Values:</h3>
-            <img src="images/coefficient-comparison.jpg" alt="Coefficient of Restitution and Kinetic Friction Comparison Table" class="w-full max-w-xl mx-auto project-image object-contain mb-8">
+            <img src="images/coefficient-comparison.jpg"
+                 alt="Coefficient of Restitution and Kinetic Friction Comparison Table"
+                 class="w-full max-w-2xl mx-auto project-image object-contain mb-8"> <!-- Increased max-w-xl to max-w-2xl -->
             <p class="text-lg mb-4">
                 The experimentally calculated values for the coefficient of restitution and kinetic friction align well with accepted scientific literature values. This agreement, derived from principles of linear motion, further supports the conclusion that the bulk of trajectory errors are attributable to unforeseen conditions primarily affecting angular momenta.
             </p>

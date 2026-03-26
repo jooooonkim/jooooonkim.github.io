@@ -388,7 +388,7 @@
     <!-- Footer -->
     <footer class="py-8 text-center">
         <div class="container mx-auto px-6">
-            <p class="text-lg">&copy; 2025 Joon Kim. All rights reserved.</p>
+            <p class="text-lg">&copy; <span id="year">2025</span> Joon Kim. All rights reserved.</p>
             <div class="flex justify-center space-x-6 mt-4">
                 <a href="https://www.linkedin.com/in/jooooonkim" target="_blank">
                     <i class="fab fa-linkedin text-2xl"></i>
@@ -436,6 +436,9 @@
                 }
             });
         });
+
+        // Year for copyright thing
+        document.getElementById("current-year").textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

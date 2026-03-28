@@ -35,23 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // 3. Loav navbar
-    const navbarPlaceholder = document.getElementById("navbar-placeholder");
-    
-    if (navbarPlaceholder) {
-        fetch('navbar.html')
-            .then(response => {
-                if (!response.ok) throw new Error("Navbar file not found");
-                return response.text();
-            })
-            .then(data => {
-                navbarPlaceholder.innerHTML = data;
-                initializeMenu(); // Plug in the buttons now that they exist!
-            })
-            .catch(err => console.error("Error loading navbar:", err));
-    }
-
-    // 4. Smooth scrolling
+    // 3. Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');

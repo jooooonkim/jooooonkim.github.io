@@ -211,3 +211,55 @@ footer a:hover {
     transform: scale(1.1); /* Slightly larger scale for footer icons */
     box-shadow: var(--shadow-light); /* Subtle shadow on hover */
 }
+
+/* Fading background */
+.fading-background {
+    height: 300px; 
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+
+/* --- Project pages styles --- */
+/* Video containers */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 */
+    margin-bottom: 1rem;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-medium);
+}
+.video-container-portrait {
+    padding-bottom: 177.77%; /* 9:16 */
+}
+
+/* Project Images */
+.project-image {
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s ease;
+}
+.project-image:hover {
+    transform: scale(1.02);
+}
+
+/* Iteration Boxes (The grey boxes) */
+.iteration-box {
+    background-color: #f9f9f9;
+    border-left: 5px solid var(--color-goldenrod-orange-gold);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-light);
+}

@@ -9,20 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="antialiased">
 
     <!-- Navigation Bar -->
     <nav class="shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../../../index.html" class="text-3xl font-bold">Joon Kim</a>
+            <a href="../../index.html" class="text-3xl font-bold">Joon Kim</a>
             <div class="hidden md:flex space-x-8 text-xl">
-                <a href="../../../index.html#about">About</a>
-                <a href="../../../index.html#projects">Featured Projects</a>
-                <a href="../../../index.html#resume">Resume</a>
-                <a href="../../../index.html#contact">Contact</a>
-                <a href="../../../all-projects.html">All Projects</a>
+                <a href="../../index.html#about">About</a>
+                <a href="../../index.html#projects">Featured Projects</a>
+                <a href="../../index.html#resume">Resume</a>
+                <a href="../../index.html#contact">Contact</a>
+                <a href="../../all-projects.html">All Projects</a>
             </div>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden focus:outline-none">
@@ -31,11 +31,11 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden py-2 shadow-inner" style="background-color: var(--color-dark-grey-brown);">
-            <a href="../../../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
-            <a href="../../../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
-            <a href="../../../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
-            <a href="../../../index.html#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
-            <a href="../../../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
+            <a href="../../index.html#about" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
+            <a href="../../index.html#projects" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Featured Projects</a>
+            <a href="../../index.html#resume" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Resume</a>
+            <a href="../../index.html#contact" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">Contact</a>
+            <a href="../../all-projects.html" class="block px-6 py-2 text-white hover:bg-gray-700 transition duration-300">All Projects</a>
         </div>
     </nav>
 
@@ -46,7 +46,7 @@
         <!-- Header -->
         <section class="container mx-auto px-6 max-w-6xl">
             <div class="mb-8 -mt-20 relative z-20 text-left">
-                <a href="../../../all-projects.html" class="btn-primary inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
+                <a href="../../all-projects.html" class="btn-primary inline-flex items-center font-bold py-2 px-6 rounded-full shadow-md">
                     <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
                 </a>
             </div>
@@ -108,13 +108,15 @@
                 </div>
                 <!-- Portrait Video Column -->
                 <div class="md:w-2/5 flex justify-center items-center">
-                    <div class="video-container video-container-portrait w-full max-w-sm">
-                        <iframe src="https://www.youtube.com/embed/Xq8ehIhy0qw"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                        </iframe>
+                    <div class="w-full max-w-sm">
+                        <div class="video-container video-container-portrait">
+                            <iframe src="https://www.youtube.com/embed/Xq8ehIhy0qw"
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,7 +180,7 @@
 
         <!-- Back to Projects Button -->
         <section class="container mx-auto px-6 max-w-4xl text-center py-8">
-            <a href="../../../all-projects.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
+            <a href="../../all-projects.html" class="btn-primary py-3 px-8 rounded-full shadow-lg">
                 <i class="fas fa-arrow-left mr-2"></i> Back to All Projects
             </a>
         </section>
@@ -203,7 +205,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="../../js/script.js"></script>
 
 </body>
 </html>

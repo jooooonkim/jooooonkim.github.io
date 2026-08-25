@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     };
+    initializeMenu();
 
     // 3. Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

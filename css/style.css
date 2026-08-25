@@ -98,13 +98,14 @@ nav a:hover {
 .hero-section h1 {
     color: var(--color-goldenrod-orange-gold); /* Hero title accent */
 }
-.hero-section .btn-primary {
+/* Primary button (hero CTA, project page "back" pills, etc.) */
+.btn-primary {
     background-color: var(--color-goldenrod-orange-gold);
     color: var(--color-dark-grey-brown); /* Text on gold button */
     transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     font-weight: 600; /* Slightly bolder for buttons */
 }
-.hero-section .btn-primary:hover {
+.btn-primary:hover {
     background-color: var(--color-medium-brown); /* Darker gold/brown on hover */
     color: var(--color-white);
     transform: scale(1.05) translateY(-3px);
@@ -115,6 +116,10 @@ nav a:hover {
 h2 {
     color: var(--color-dark-brown-taupe); /* Heading color */
     font-weight: 700; /* Bolder headings */
+}
+h3 {
+    color: var(--color-medium-brown);
+    font-weight: 600;
 }
 
 /* Project card hover effect */
@@ -189,7 +194,7 @@ h2 {
     font-weight: 600;
 }
 .btn-contact-github:hover {
-    background-color: var(--color-jet-black); /* Jet black for GitHub hover */
+    background-color: #1a1a1a; /* Near-black for GitHub hover */
     transform: scale(1.05) translateY(-3px);
     box-shadow: var(--shadow-medium);
 }
@@ -212,9 +217,10 @@ footer a:hover {
     box-shadow: var(--shadow-light); /* Subtle shadow on hover */
 }
 
-/* Fading background */
+/* Fading background (project page hero band; each page sets its own
+   background-image inline via style="background-image: url(...)") */
 .fading-background {
-    height: 300px; 
+    height: 200px;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -243,6 +249,9 @@ footer a:hover {
 .video-container-portrait {
     padding-bottom: 177.77%; /* 9:16 */
 }
+.video-container-portrait-3-4 {
+    padding-bottom: 133.33%; /* 3:4 */
+}
 
 /* Project Images */
 .project-image {
@@ -254,12 +263,46 @@ footer a:hover {
     transform: scale(1.02);
 }
 
-/* Iteration Boxes (The grey boxes) */
-.iteration-box {
-    background-color: #f9f9f9;
-    border-left: 5px solid var(--color-goldenrod-orange-gold);
-    padding: 2rem;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow-light);
+/* Image/video aspect-ratio helpers (used with position:relative + absolute-fill img/iframe) */
+.aspect-ratio-4-3 {
+    padding-bottom: 75%; /* 3 / 4 */
+}
+.aspect-ratio-3-4 {
+    padding-bottom: 133.33%; /* 4 / 3 */
+}
+.aspect-ratio-3-2 {
+    padding-bottom: 66.66%; /* 2 / 3 */
+}
+.aspect-ratio-5-4 {
+    padding-bottom: 80%; /* 4 / 5 */
+}
+.aspect-ratio-2-3-portrait {
+    padding-bottom: 150%; /* 3 / 2 */
+}
+
+/* Project page "download report/presentation" pill button */
+.btn-download-project {
+    background-color: var(--color-dark-brown-taupe);
+    color: var(--color-white);
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 1.5rem;
+}
+.btn-download-project:hover {
+    background-color: var(--color-medium-brown);
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Tool/tech tag pill (used on project detail pages) */
+.tag {
+    background-color: var(--color-goldenrod-orange-gold);
+    color: var(--color-dark-grey-brown);
+    font-weight: 500;
 }

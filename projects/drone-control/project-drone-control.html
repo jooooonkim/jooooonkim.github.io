@@ -55,7 +55,7 @@
             <div class="text-center mb-8">
                 <h1 class="text-5xl md:text-7xl font-extrabold mb-4" style="color: var(--color-dark-brown-taupe);">Motion Tracking Drone Control</h1>
                 <p class="text-2xl md:text-3xl font-medium max-w-3xl mx-auto">
-                    This project developed a real-time drone control system using webcam-based hand motion tracking, translating hand gestures into drone commands via the Crazyflie Python API. Key achievements included integrating hand tracking with drone control, optimizing data communication, and implementing advanced maneuvers with enhanced stability and responsiveness.
+                    A drone that follows your hand. A webcam tracks hand position and feeds it into the Crazyflie Python API in real time, turning gestures directly into flight commands. Getting it stable took work — this page covers what that took.
                 </p>
             </div>
         </section>
@@ -72,7 +72,7 @@
                 </div>
                 <!-- Text in the middle -->
                 <p class="text-xl font-medium md:w-1/2">
-                    This project focuses on the initial exploration of technology, combining hand tracking with drone swarm control. To see further developments and applications, check out "Interactive Drone Simulations of Dynamic Systems".
+                    This was the first pass at combining hand tracking with drone control. The follow-up project, Interactive Drone Simulations of Dynamic Systems, takes it further.
                 </p>
                 <!-- Right Image (5:4 Landscape) -->
                 <div class="w-full md:w-1/4 relative aspect-ratio-5-4 flex-shrink-0">
@@ -100,7 +100,7 @@
                 </iframe>
             </div>
             <p class="text-lg text-center max-w-3xl mx-auto">
-                The final iteration of the Motion Tracking Drone Control project achieved significant advancements in responsive and stable drone navigation. This demonstration highlights the culmination of our efforts in refining hand gesture interpretation, optimizing data flow, and implementing robust control algorithms to deliver a seamless and intuitive user experience.
+By the final iteration, the drone held a stable hover and responded to gestures with almost no lag. Getting there meant rewriting the gesture interpretation, tightening the data pipeline between webcam and drone, and tuning the control algorithm until it stopped overcorrecting.
             </p>
         </section>
 
@@ -111,17 +111,15 @@
                 <div class="md:col-span-1 lg:col-span-1 text-lg bg-gray-100 p-6 rounded-lg shadow-md h-full flex flex-col justify-between">
                     <h3 class="text-2xl font-semibold mb-4 text-center">System Development</h3>
                     <ul class="list-disc list-inside space-y-2">
-                        <li>Developed a real-time drone control system using webcam-based hand motion tracking.</li>
-                        <li>Utilized MediaPipe and Python to detect and interpret hand gestures.</li>
-                        <li>Translated hand gestures into drone commands via the Crazyflie Python API.</li>
+                        <li>Built a real-time pipeline: webcam feed → MediaPipe hand detection → gesture interpretation in Python.</li>
+                        <li>Fed that gesture data straight into the Crazyflie Python API as flight commands.</li>
                     </ul>
                 </div>
                 <div class="md:col-span-1 lg:col-span-1 text-lg bg-gray-100 p-6 rounded-lg shadow-md h-full flex flex-col justify-between">
                     <h3 class="text-2xl font-semibold mb-4 text-center">Integration & Optimization</h3>
                     <ul class="list-disc list-inside space-y-2">
-                        <li>Successfully integrated hand tracking with drone control for intuitive navigation.</li>
-                        <li>Optimized real-time data communication between hand tracking and drone control scripts.</li>
-                        <li>Implemented advanced drone maneuvers with enhanced stability and responsiveness.</li>
+                        <li>Cut the lag between hand tracking and the drone control script until the drone felt like an extension of the hand, not a delayed response to it.</li>
+                        <li>Added more advanced maneuvers once the basic hover held steady.</li>
                     </ul>
                 </div>
                 <!-- Photo: Drones/hands/computer related to system -->
@@ -145,11 +143,10 @@
                 </div>
                 <div class="md:w-2/3 text-lg">
                     <ul class="list-disc list-inside space-y-3 mb-6">
-                        <li>Presented the project at the prestigious VIP showcase event.</li>
-                        <li>Connected with numerous industry professionals and academics, fostering valuable networking opportunities.</li>
-                        <li>Received an invitation to present at additional showcase events, recognizing the project's innovative approach.</li>
-                        <li>Successfully secured additional funding to support continued research and development, enabling further advancements.</li>
-                        <li>Inspired to further develop the project based on overwhelmingly positive feedback and interest from attendees.</li>
+                        <li>Presented the project at Cooper Union's VIP showcase, in front of engineers and faculty from outside the lab.</li>
+                        <li>Got invited back to present at follow-on showcase events.</li>
+                        <li>Secured additional funding to keep developing it.</li>
+                        <li>The feedback from that first showcase is what pushed the project into its next phase — the drone simulation work.</li>
                     </ul>
                 </div>
             </div>
@@ -162,15 +159,14 @@
                 <div class="md:w-1/2 text-lg mb-6 md:mb-0 bg-gray-100 p-6 rounded-lg shadow-md">
                     <h3 class="text-2xl font-semibold mb-4">Establishing Basic Control</h3>
                     <p class="mb-4">
-                        The initial phase of the project focused on establishing a fundamental connection between hand tracking and drone control. This involved:
+                        The first version just had to prove the basic link worked:
                     </p>
                     <ul class="list-disc list-inside space-y-2">
-                        <li>Establishing communication between the hand tracking system and the drone's API.</li>
-                        <li>Implementing simple thrust control, allowing the drone to move only up and down based on hand gestures.</li>
-                        <li>Operating without a sophisticated stabilization system, which provided foundational insights into real-time control challenges.</li>
+                        <li>Wired up communication between the hand tracking system and the drone's API, with simple thrust control — up and down only, based on hand height.</li>
+                        <li>No stabilization system yet, so the drone drifted on its own between commands.</li>
                     </ul>
                     <p class="mt-4">
-                        This early test, while rudimentary, proved the feasibility of using hand gestures for direct drone manipulation and laid the groundwork for future development in stability and complex maneuver implementation.
+                        It was rough, but it proved hand gestures could fly a drone directly. Everything after this was about making that stable.
                     </p>
                 </div>
                 <div class="md:w-1/2 flex justify-center items-center">

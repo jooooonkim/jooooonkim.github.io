@@ -55,7 +55,7 @@
             <div class="text-center mb-8">
                 <h1 class="text-5xl md:text-7xl font-extrabold mb-4" style="color: var(--color-dark-brown-taupe);">Dynamic Analysis and Modelling of Curling Stone Motion</h1>
                 <p class="text-2xl md:text-3xl font-medium max-w-3xl mx-auto">
-                    This project delves into the physics of curling, specifically analyzing the momentum and collision mechanics of curling stones. Using video motion-tracking (Tracker) and Python modeling, the study aims to understand the intricate interactions of stones and the governing physics. A secondary objective is to experimentally determine material properties: the coefficient of restitution between stones and the average friction of the rink.
+                    A close look at what happens when curling stones collide. Video motion-tracking software (Tracker) and Python models pull apart the momentum and collision mechanics frame by frame, then use them to measure two real material properties: the coefficient of restitution between stones, and average friction on the ice.
                 </p>
                 <!-- Download buttons for the project report and presentation -->
                 <div class="flex flex-wrap justify-center gap-4 mt-6">
@@ -81,7 +81,7 @@
                 </iframe>
             </div>
             <p class="text-lg text-center max-w-3xl mx-auto">
-                This project centers on a specific clip from the gold medal match in the 2018 PyeongChang Olympics, depicting a scenario where one curling stone initiates a series of interactions among other stones, influencing their final positions and velocities. This video served as the primary experimental data source.
+The data comes from one clip: the 2018 PyeongChang Olympics gold medal match, where one stone sets off a chain of collisions with the others. That footage is the entire experimental dataset.
             </p>
         </section>
 
@@ -97,7 +97,7 @@
                 <div class="md:w-1/2 text-lg">
                     <h3 class="text-3xl mb-4">Curling Info & Problem Statement</h3>
                     <p class="mb-4">
-                        The physics behind curling stone interactions holds immense practical importance for optimizing gameplay. Players often predict stone motions and collisions to enhance their strategy, highlighting the significant role of physics in this sport. This study aims to model these interactions to understand their effects on stone trajectories and placements, and experimentally determine the coefficient of restitution and average rink friction.
+                        Curlers read stone collisions to plan their next shot, whether they'd call it physics or not. This study models those collisions directly, to see how they set trajectories and final placement, and to pull real numbers for the coefficient of restitution and rink friction out of the footage.
                     </p>
                     <h3 class="text-3xl mb-4 mt-6">Assumptions and Simplifications</h3>
                     <ul class="list-disc list-inside space-y-2">
@@ -105,7 +105,7 @@
                         <li><strong>Friction:</strong> Assumed constant and small, negligible for short interactions due to no sweeping in the video.</li>
                         <li><strong>Air Drag:</strong> Disregarded due to relatively slow velocities and short distances.</li>
                         <li><strong>Center of Mass (COM):</strong> Assumed to coincide with the center of the granite disc.</li>
-                        <li><strong>Coefficient of Restitution (e):</strong> Utilized as a constant for all standard curling stones and interactions.</li>
+                        <li><strong>Coefficient of Restitution (e):</strong> Treated as a constant across all stones and all interactions.</li>
                     </ul>
                 </div>
             </div>
@@ -244,7 +244,7 @@
             <div class="flex flex-col md:flex-row md:space-x-8 items-start">
                 <div class="md:w-1/2 text-lg mb-6 md:mb-0">
                     <p class="mb-4">
-                        After the first collision, the final velocity of Stone B (from the rigid-body analysis) was utilized to parametrize its trajectory: $x = -0.189 + t$ and $y = 0.629 - 3.46284t$. This calculated path, although slightly off from the real Tracker data, indicates Stone B's movement towards a second collision. The same Python code and process are then applied for the Stone B and C interaction with updated initial conditions.
+                        After the first collision, Stone B's final velocity (from the rigid-body analysis) sets its trajectory: $x = -0.189 + t$ and $y = 0.629 - 3.46284t$. That path runs slightly off from the real Tracker data, but it's close enough to show Stone B heading into a second collision. The same code runs again for the B-C interaction, just with updated initial conditions.
                     </p>
                 </div>
                 <div class="md:w-1/2 flex flex-col space-y-4">
@@ -307,7 +307,7 @@
                      class="w-full project-image object-cover"> <!-- Removed max-w-2xl -->
             </div>
             <p class="text-lg mb-4">
-                Interestingly, the point-mass simplification yielded a trajectory much closer to the true path in both x and y motion, despite entirely ignoring rotational motion. While this simplification introduces some error, the rigid-body analysis, though theoretically more "correct," predicted a trajectory that deviated significantly more, including a complete change in velocity direction after Collision 2. This suggests that unaccounted-for torque within the system produced greater errors in the simulations than the simplification of ignoring rotation.
+The point-mass simplification actually tracked closer to the true path in both x and y motion than the rigid-body model did, despite ignoring rotation entirely. The theoretically more "correct" rigid-body analysis deviated further — it even flipped velocity direction after Collision 2. That's a sign that unaccounted-for torque hurt the simulation more than skipping rotation did.
             </p>
             <h3 class="text-3xl mb-4 mt-8">Experimental vs. Actual Values:</h3>
             <img src="images/coefficient-comparison.jpg"
@@ -317,7 +317,7 @@
                 The experimentally calculated values for the coefficient of restitution and kinetic friction align well with accepted scientific literature values. This agreement, derived from principles of linear motion, further supports the conclusion that the bulk of trajectory errors are attributable to unforeseen conditions primarily affecting angular momenta.
             </p>
             <p class="text-lg mb-4">
-                In summary, the assumption of constant friction across the rink appears to be a significant source of error. Uneven friction distribution likely caused an increase in angular momentum after collisions. Future experimental setups should prioritize controlled ice surfaces. Other minor error sources included the video's low frame rate (affecting Tracker accuracy) and changing camera angles. An ideal setup would feature a high-frame-rate camera consistently perpendicular to the rink.
+The biggest error source is probably the constant-friction assumption — uneven friction across the rink likely added angular momentum after each collision. Low frame rate and a moving camera didn't help Tracker's accuracy either. A high-frame-rate camera locked perpendicular to the rink, over a controlled ice surface, would tighten this up considerably.
             </p>
         </section>
 

@@ -1,9 +1,10 @@
 {
   "name": "jooooonkim-portfolio",
   "private": true,
-  "description": "Static portfolio site (no build step - this file exists only to wire up local checks).",
+  "description": "Static portfolio site - deployed HTML/CSS/JS needs no build step, but this wires up local checks and the one real build (Tailwind CSS).",
   "scripts": {
     "test": "node scripts/check-contrast.js && node scripts/build-includes.js --check",
+    "build:css": "tailwindcss -i css/tailwind-input.css -o css/tailwind-built.css --minify",
     "build:includes": "node scripts/build-includes.js",
     "build:favicons": "node scripts/generate-favicons.js",
     "optimize:images": "node scripts/optimize-images.js",
@@ -13,7 +14,8 @@
     "ffmpeg-static": "^5.3.0",
     "ffprobe-static": "^3.1.0",
     "fluent-ffmpeg": "^2.1.3",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "tailwindcss": "^3.4.19"
   },
   "allowScripts": {
     "ffmpeg-static@5.3.0": true

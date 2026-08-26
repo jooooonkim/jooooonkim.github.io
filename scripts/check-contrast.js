@@ -36,6 +36,9 @@ function contrastRatio(hexA, hexB) {
 const AA_NORMAL = 4.5;
 const AA_LARGE = 3.0;
 
+// WCAG 1.4.11 non-text contrast minimum (UI components/focus indicators).
+const AA_NON_TEXT = 3.0;
+
 // --- Color tokens, mirrored from css/style.css :root ------------------------
 // (Kept as a literal copy rather than parsed from the CSS file: a hand-parsed
 // CSS reader would be more "automatic" but also more fragile and harder to
@@ -143,6 +146,27 @@ const PAIRS = [
   },
 ];
 
+// --- Focus ring: a:focus-visible / button:focus-visible in css/style.css ----
+// Two-tone ring (white inner outline + dark-grey-brown outer box-shadow)
+// instead of one color: the site alternates between light and dark
+// sections, and no single palette color clears 3:1 against both. WCAG
+// 1.4.11 only requires ONE part of a multi-part indicator to meet the
+// minimum against whatever it's drawn over, so each background below only
+// needs its ring MAX (not both individual rings) to clear AA_NON_TEXT.
+
+const FOCUS_RING = {
+  innerWhite: COLORS.white,
+  outerDark: COLORS.darkGreyBrown,
+};
+
+const FOCUS_RING_BACKGROUNDS = [
+  { name: 'white page background', bg: COLORS.white },
+  { name: 'dark nav/footer background', bg: COLORS.darkGreyBrown },
+  { name: 'gold button background', bg: COLORS.goldenrod },
+  { name: 'light-gray card background', bg: COLORS.lightGray100 },
+  { name: 'off-white section background', bg: COLORS.offWhiteSection },
+];
+
 // --- Run the checks ----------------------------------------------------------
 
 let failures = 0;
@@ -160,10 +184,26 @@ for (const pair of PAIRS) {
 }
 
 console.log('');
+
+for (const { name, bg } of FOCUS_RING_BACKGROUNDS) {
+  const innerRatio = contrastRatio(FOCUS_RING.innerWhite, bg);
+  const outerRatio = contrastRatio(FOCUS_RING.outerDark, bg);
+  const best = Math.max(innerRatio, outerRatio);
+  const pass = best >= AA_NON_TEXT;
+  const status = pass ? 'PASS' : 'FAIL';
+  if (!pass) failures += 1;
+  console.log(
+    `[${status}] focus ring on ${name}: inner ${innerRatio.toFixed(2)}:1, outer ${outerRatio.toFixed(2)}:1 ` +
+      `(best ${best.toFixed(2)}:1, needs ${AA_NON_TEXT}:1)`
+  );
+}
+
+console.log('');
+const totalChecks = PAIRS.length + FOCUS_RING_BACKGROUNDS.length;
 if (failures > 0) {
-  console.error(`${failures} of ${PAIRS.length} pairing(s) fail WCAG AA.`);
+  console.error(`${failures} of ${totalChecks} check(s) fail WCAG AA.`);
   process.exit(1);
 } else {
-  console.log(`All ${PAIRS.length} color pairings pass WCAG AA.`);
+  console.log(`All ${totalChecks} checks pass WCAG AA.`);
   process.exit(0);
 }

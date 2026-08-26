@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mobileMenuButton && mobileMenu) {
             // Toggle menu open/close
             mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+                const isNowHidden = mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', String(!isNowHidden));
             });
 
             // Close menu when link is clicked
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Hide menu if it's an anchor link or a page link
                     if (href.includes('#') || href.endsWith('.html')) {
                         mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
                     }
                 });
             });

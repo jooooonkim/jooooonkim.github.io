@@ -19,6 +19,24 @@ body {
     color: var(--color-dark-brown-taupe); /* Primary text color */
 }
 
+/* Keyboard focus indicator, applied site-wide. The mobile-menu button used to
+   strip its focus ring via Tailwind's focus:outline-none with nothing to
+   replace it, leaving keyboard users with zero visual indication of focus on
+   the site's primary mobile nav control. This restores a visible indicator
+   for every interactive element instead of just that one button.
+   Two-tone ring (white inner outline + dark outer box-shadow) rather than a
+   single brand color: the site alternates between white/light and dark-brown
+   sections, and no single color from the palette clears the WCAG 1.4.11
+   3:1 non-text contrast minimum against both. This pairing does - see the
+   "Focus ring" entries in scripts/check-contrast.js. */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--color-dark-grey-brown);
+    border-radius: 2px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

@@ -49,6 +49,19 @@ nav a:hover {
     border-radius: 4px; /* Apply rounded corners for shadow */
 }
 
+/* "All Projects" — the one nav link that leaves the current page for another.
+   Border uses currentColor so it always matches the text (white at rest, gold on hover). */
+.nav-cta {
+    border: 1.5px solid currentColor;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.9rem;
+}
+#mobile-menu .nav-cta {
+    display: block;
+    margin: 0.5rem 1.5rem;
+    text-align: center;
+}
+
 /* Hero section */
 .hero-section {
     background-color: var(--color-dark-grey-brown); /* Fallback background for hero */

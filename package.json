@@ -1,0 +1,8 @@
+{
+  "name": "jooooonkim-portfolio",
+  "private": true,
+  "description": "Static portfolio site (no build step - this file exists only to wire up local checks).",
+  "scripts": {
+    "test": "node scripts/check-contrast.js"
+  }
+}

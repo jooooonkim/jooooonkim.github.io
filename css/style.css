@@ -4,6 +4,8 @@
     --color-dark-grey-brown: #372C2E;
     --color-white: #FFFFFF;
     --color-goldenrod-orange-gold: #DE9E48;
+    --color-goldenrod-dark: #97621B; /* Same hue/saturation as the goldenrod above, darkened for
+       WCAG AA text contrast on white (5.15:1 vs. the base gold's 2.31:1). Text-only use. */
     --color-medium-brown: #7A431D;
     --shadow-light: 0 4px 8px rgba(0,0,0,0.1);
     --shadow-medium: 0 8px 16px rgba(0,0,0,0.2);
@@ -151,7 +153,9 @@ h3 {
     font-weight: 600;
 }
 .project-card a {
-    color: var(--color-goldenrod-orange-gold); /* Project link */
+    color: var(--color-goldenrod-dark); /* Project link. Was --color-goldenrod-orange-gold,
+       which measured 2.31:1 against this white card background - fails WCAG AA (needs 4.5:1).
+       This darker, equally-saturated gold measures 5.15:1. See scripts/check-contrast.js. */
     transition: color 0.3s ease-in-out; /* Removed transform and box-shadow transitions */
     font-weight: 500;
     display: inline-block; /* Required for transform on inline elements */
